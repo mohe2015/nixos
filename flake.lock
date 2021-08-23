@@ -78,44 +78,22 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1629292755,
-        "narHash": "sha256-BAM8RR6e+0Re57PB/3n4AMLxjCJk+Z3WcDy3wwlw9+8=",
-        "type": "git",
-        "url": "file:///etc/nixos/nixpkgs"
+        "narHash": "sha256-zE3UbA7vnU83LEWjkLxtIdzpONiKMIizuIfyYsjIH0E=",
+        "path": "nixpkgs",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "file:///etc/nixos/nixpkgs"
-      }
-    },
-    "nixpkgs-mozilla": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1626105119,
-        "narHash": "sha256-Hs921roaZbyeXp27T262HN/x3oiVLRqY8NvXbGEBJIE=",
-        "owner": "mohe2015",
-        "repo": "nixpkgs-mozilla",
-        "rev": "a3a38a5b0408467aed9989a96a038a1a470d5419",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mohe2015",
-        "ref": "flake",
-        "repo": "nixpkgs-mozilla",
-        "type": "github"
+        "path": "nixpkgs",
+        "type": "path"
       }
     },
     "release": {
       "locked": {
-        "lastModified": 1629727143,
-        "narHash": "sha256-zRWq+g93hZzZG3M5ERyYDJw5riYME1YL5KjkatyF+rw=",
+        "lastModified": 1629753597,
+        "narHash": "sha256-X3nSGq3oP99BNHHzq88mnF/QftiARBqV2YAbih8lr10=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "983bd5b78c17dfb347070102b72c9c40c3f5e1c4",
+        "rev": "4fc6d88dc71af388ceba3d100bacd19ad7d08f01",
         "type": "github"
       },
       "original": {
@@ -132,7 +110,6 @@
         "home-manager": "home-manager",
         "home-manager-release": "home-manager-release",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-mozilla": "nixpkgs-mozilla",
         "release": "release"
       }
     }

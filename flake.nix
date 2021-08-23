@@ -22,20 +22,20 @@
 
   inputs =
     {
-      nixpkgs.url = "git+file:///etc/nixos/nixpkgs";
+      nixpkgs.url = "path:nixpkgs";
       home-manager.url = "github:nix-community/home-manager";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
       flake-utils.url = "github:numtide/flake-utils";
       release.url = "github:NixOS/nixpkgs/release-21.05";
       home-manager-release.url = "github:nix-community/home-manager/release-21.05";
       home-manager-release.inputs.nixpkgs.follows = "release";
-      nixpkgs-mozilla.url = "github:mohe2015/nixpkgs-mozilla/flake";
-      nixpkgs-mozilla.inputs.nixpkgs.follows = "nixpkgs";
+#      nixpkgs-mozilla.url = "github:mohe2015/nixpkgs-mozilla/flake";
+#      nixpkgs-mozilla.inputs.nixpkgs.follows = "nixpkgs";
       agenix.url = "github:ryantm/agenix";
       agenix.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, release, home-manager-release, nixpkgs-mozilla, agenix, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, release, home-manager-release, agenix, ... }:
   {
     nixosConfigurations = {
       nixos = let
