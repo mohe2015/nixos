@@ -20,6 +20,7 @@ sleep 20
 
 # TODO --user-data-from-file
 
+# https://nixos.org/manual/nixos/stable/#sec-installing-from-other-distro
 ssh-keygen -R $(hcloud server ip $NAME)
 ssh-keyscan $(hcloud server ip $NAME) >> ~/.ssh/known_hosts
 hcloud server ssh $NAME 'adduser --disabled-password --gecos "" moritz'
@@ -32,7 +33,7 @@ hcloud server ssh $NAME 'chmod 600 /home/moritz/.ssh/authorized_keys'
 hcloud server ssh $NAME 'mkdir -m 0755 /nix && chown moritz /nix'
 hcloud server ssh -u moritz $NAME 'curl -L https://nixos.org/nix/install | sh'
 hcloud server ssh -u moritz $NAME 'echo '"'"'if [ -e /home/moritz/.nix-profile/etc/profile.d/nix.sh ]; then . /home/moritz/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer'"'"' | cat - ~/.bashrc | tee ~/.bashrc'
-hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs'
+hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable-small nixpkgs'
 hcloud server ssh -u moritz $NAME 'nix-channel --update'
 hcloud server ssh -u moritz $NAME 'nix-env -f '"'"'<nixpkgs/nixos>'"'"' --arg configuration {} -iA config.system.build.{nixos-generate-config,nixos-install,nixos-enter}'
 hcloud server ssh -u moritz $NAME 'sudo `which nixos-generate-config` --root /'
@@ -47,8 +48,11 @@ hcloud server ssh -u moritz $NAME 'sudo chown -R 0.0 /nix'
 hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS'
 hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS_LUSTRATE'
 hcloud server ssh -u moritz $NAME 'echo etc/nixos | sudo tee -a /etc/NIXOS_LUSTRATE'
-hcloud server ssh -u moritz $NAME 'sudo mv -v /boot /boot.bak'
+#hcloud server ssh -u moritz $NAME 'sudo mv -v /boot /boot.bak'
+hcloud server ssh -u moritz $NAME 'sudo rm -R /boot' # to keep /boot/efi mountpoint
 hcloud server ssh -u moritz $NAME 'sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot'
+
+read
 
 hcloud server reboot $NAME
 
