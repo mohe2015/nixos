@@ -13,7 +13,8 @@ done
 
 date
 
-hcloud server create --datacenter nbg1-dc3 --image ubuntu-20.04 --type $TYPE --ssh-key ~/.ssh/id_rsa.pub --name $NAME
+hcloud context use nixos
+hcloud server create --datacenter nbg1-dc3 --image debian-11 --type $TYPE --ssh-key ~/.ssh/id_rsa.pub --name $NAME
 
 sleep 20
 
@@ -39,11 +40,7 @@ hcloud server ssh -u moritz $NAME 'sudo `which nixos-generate-config` --root /'
 hcloud server ip $NAME
 hcloud server ip --ipv6 $NAME
 
-scp configuration_template.nix root@$(hcloud server ip $NAME):/etc/nixos/configuration.nix
-
-mkdir -p $NAME
-scp root@$(hcloud server ip $NAME):/etc/nixos/configuration.nix $NAME/configuration.nix
-scp root@$(hcloud server ip $NAME):/etc/nixos/hardware-configuration.nix $NAME/hardware-configuration.nix
+scp configuration.nix root@$(hcloud server ip $NAME):/etc/nixos/configuration.nix
 
 hcloud server ssh -u moritz $NAME 'nix-env -p /nix/var/nix/profiles/system -f '"'"'<nixpkgs/nixos>'"'"' -I nixos-config=/etc/nixos/configuration.nix -iA system'
 hcloud server ssh -u moritz $NAME 'sudo chown -R 0.0 /nix'
@@ -58,9 +55,7 @@ hcloud server reboot $NAME
 sleep 60
 
 ssh-keygen -R $(hcloud server ip $NAME)
-set +e
 ssh-keyscan $(hcloud server ip $NAME) >> ~/.ssh/known_hosts
-set -e
 
 hcloud server ssh $NAME nix-channel --update
 hcloud server ssh $NAME rm -rf /old-root
@@ -68,13 +63,13 @@ hcloud server ssh $NAME nix-collect-garbage -d
 
 date
 
-hcloud server shutdown $NAME
+#hcloud server shutdown $NAME
 
-sleep 10
+#sleep 10
 
-hcloud server create-image --label name=nixos --description "nixos" --type snapshot $NAME
+#hcloud server create-image --label name=nixos --description "nixos" --type snapshot $NAME
 
-echo "SERVER DID NOT GET DELETED"
+#echo "SERVER DID NOT GET DELETED"
 #hcloud server delete $NAME
 
 # server from this script 3:30 until ready (about)
