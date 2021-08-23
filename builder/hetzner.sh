@@ -49,14 +49,15 @@ hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS'
 hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS_LUSTRATE'
 hcloud server ssh -u moritz $NAME 'echo etc/nixos | sudo tee -a /etc/NIXOS_LUSTRATE'
 #hcloud server ssh -u moritz $NAME 'sudo mv -v /boot /boot.bak'
+set +e
 hcloud server ssh -u moritz $NAME 'sudo rm -R /boot' # to keep /boot/efi mountpoint
+set -e
 hcloud server ssh -u moritz $NAME 'sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot'
 
-read
-
+# alternatively we could try kexec just for fun
 hcloud server reboot $NAME
 
-sleep 60
+sleep 30
 
 ssh-keygen -R $(hcloud server ip $NAME)
 ssh-keyscan $(hcloud server ip $NAME) >> ~/.ssh/known_hosts
@@ -64,6 +65,9 @@ ssh-keyscan $(hcloud server ip $NAME) >> ~/.ssh/known_hosts
 hcloud server ssh $NAME nix-channel --update
 hcloud server ssh $NAME rm -rf /old-root
 hcloud server ssh $NAME nix-collect-garbage -d
+
+hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable-small nixpkgs'
+hcloud server ssh -u moritz $NAME 'nix-channel --update'
 
 date
 
