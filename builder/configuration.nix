@@ -63,11 +63,12 @@
   users.users.moritz = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
+    # sudo cat /root/.ssh/id_rsa.pub
+    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDkur1jL+EAQ+i48svt0iERUYNAA6tlR3TeVXq2+IXc4WoerwXzpUwuagB5ynNyTdk+nmAzLZ4kP/kbkqI3DkZhcHL9k2E0ywdsxsHezCEeDu7h5ZwsZr9gkGPjJtceRtk5bE/JQrrBvZWhn7N3bghNj8skuaox1qtiU2KpEW8mlg6yxYMJIEdPXnLWRep8kCj/HCZwJ9wzpYs1ZdNsNIom2/eXGaK0b/1wvypTsC991oBzXtdEICR7Vyd/tlTQ0+roN2PSPSqQgq3RQx/87fz2rlfSu3bXAG0gZ5/aPPjRSqs4B5v0duwapNl6gDI2kwzwd4ORIDQgZwm979z+FmlXrJWnuvyvR/caih/pbRFu4DHWPRhJERTaHvCUBC12BJI5PkyJEvgWcFxdOo6EFPCvYvBRP2TweEWr0da5LA1sseeu+HVjTtfP9EAAqxOT6vR98c7gIT5YkW7Bw/xgdWxzVLdcSMooquGB4WyI2J8HneakVVxlPGhYgrS1GwjdO+zZMY75Jqo3qnK11M/gYX+0FHraDKf0tT3Ygk8FgRVmHG/t3U6T7zk+mHYf1+oeoFHC88gob7DJL3fQCf+288dzqqxqG3esJlwj3/hwQThLu6QipyyQ86jC/rz+ann7LnEGRf9Zg8ykVDGj/POhxWHD1tw0mUTtFQh2mdyKGlNABQ== root@nixos" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
   };
 
   users.users.root = {
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
+    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDkur1jL+EAQ+i48svt0iERUYNAA6tlR3TeVXq2+IXc4WoerwXzpUwuagB5ynNyTdk+nmAzLZ4kP/kbkqI3DkZhcHL9k2E0ywdsxsHezCEeDu7h5ZwsZr9gkGPjJtceRtk5bE/JQrrBvZWhn7N3bghNj8skuaox1qtiU2KpEW8mlg6yxYMJIEdPXnLWRep8kCj/HCZwJ9wzpYs1ZdNsNIom2/eXGaK0b/1wvypTsC991oBzXtdEICR7Vyd/tlTQ0+roN2PSPSqQgq3RQx/87fz2rlfSu3bXAG0gZ5/aPPjRSqs4B5v0duwapNl6gDI2kwzwd4ORIDQgZwm979z+FmlXrJWnuvyvR/caih/pbRFu4DHWPRhJERTaHvCUBC12BJI5PkyJEvgWcFxdOo6EFPCvYvBRP2TweEWr0da5LA1sseeu+HVjTtfP9EAAqxOT6vR98c7gIT5YkW7Bw/xgdWxzVLdcSMooquGB4WyI2J8HneakVVxlPGhYgrS1GwjdO+zZMY75Jqo3qnK11M/gYX+0FHraDKf0tT3Ygk8FgRVmHG/t3U6T7zk+mHYf1+oeoFHC88gob7DJL3fQCf+288dzqqxqG3esJlwj3/hwQThLu6QipyyQ86jC/rz+ann7LnEGRf9Zg8ykVDGj/POhxWHD1tw0mUTtFQh2mdyKGlNABQ== root@nixos" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -101,6 +102,10 @@
   system.autoUpgrade.allowReboot = true;
 
   nix.gc.automatic = true;
+
+  nix.extraOptions = ''
+    secret-key-files = /root/cache-priv-key.pem
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -62,12 +62,16 @@ sleep 30
 ssh-keygen -R $(hcloud server ip $NAME)
 ssh-keyscan $(hcloud server ip $NAME) >> ~/.ssh/known_hosts
 
+hcloud server ssh $NAME nix-store --generate-binary-cache-key builder-name cache-priv-key.pem cache-pub-key.pem
 hcloud server ssh $NAME nix-channel --update
 hcloud server ssh $NAME rm -rf /old-root
 hcloud server ssh $NAME nix-collect-garbage -d
 
 hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable-small nixpkgs'
 hcloud server ssh -u moritz $NAME 'nix-channel --update'
+
+hcloud server ssh $NAME cat /root/cache-pub-key.pem
+echo write this into your nixosv config
 
 date
 
