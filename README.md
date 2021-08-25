@@ -18,3 +18,11 @@ nix build .#nixosConfigurations.nixSD.config.system.build.sdImage
 nix run github:ryantm/agenix -- -e pi-smallstep-intermediate-password.age
 
 nix run github:ryantm/agenix -- agenix --rekey
+
+https://github.com/NixOS/nix/issues/1118
+
+
+how to recover from removed build machines
+
+rm /etc/nix/machines
+nix build --option substitute false .#nixosConfigurations.nixos.config.system.build.toplevel
