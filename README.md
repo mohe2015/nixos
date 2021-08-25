@@ -24,8 +24,3 @@ sudo nix run github:ryantm/agenix -- -r -i /etc/ssh/ssh_host_ed25519_key
 
 https://github.com/NixOS/nix/issues/1118
 
-
-how to recover from removed build machines
-
-rm /etc/nix/machines
-nix build --option substitute false .#nixosConfigurations.nixos.config.system.build.toplevel

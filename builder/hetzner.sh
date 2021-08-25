@@ -49,9 +49,7 @@ hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS'
 hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS_LUSTRATE'
 hcloud server ssh -u moritz $NAME 'echo etc/nixos | sudo tee -a /etc/NIXOS_LUSTRATE'
 #hcloud server ssh -u moritz $NAME 'sudo mv -v /boot /boot.bak'
-set +e
 hcloud server ssh -u moritz $NAME 'sudo rm -R /boot' # to keep /boot/efi mountpoint
-set -e
 hcloud server ssh -u moritz $NAME 'sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot'
 
 # alternatively we could try kexec just for fun
@@ -71,7 +69,7 @@ hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/
 hcloud server ssh -u moritz $NAME 'nix-channel --update'
 
 hcloud server ssh $NAME cat /root/cache-pub-key.pem
-echo write this into your nixosv config
+echo write this into your nixos config
 
 date
 

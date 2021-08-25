@@ -12,24 +12,24 @@
 #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
-  
-/*  nix.buildMachines = [ {
+  /*
+  nix.buildMachines = [ {
     # The path to the SSH private key with which to authenticate on the build machine. The private key must not have a passphrase. If null, the building user (root on NixOS machines) must have an appropriate ssh configuration to log in non-interactively. Note that for security reasons, this path must point to a file in the local filesystem, *not* to the nix store. 
-    sshUser = "moritz";
+    sshUser = "root";
 	 hostName = "23.88.58.221";
 	 system = "x86_64-linux";
 	 # if the builder supports building for multiple architectures, 
 	 # replace the previous line by, e.g.,
 	 # systems = ["x86_64-linux" "aarch64-linux"];
 	 maxJobs = 16;
-	 speedFactor = 2;
+	 speedFactor = 4;
 	 supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 	 mandatoryFeatures = [ ];
 	}] ;
 	nix.distributedBuilds = true;
 	nix.extraOptions = ''
-builders-use-substitutes = true
-trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= builder-name:it9F5NWEo0jkYgAwwLBcwnyS4EzremqhhBdGHRnaeMY=
+#builders-use-substitutes = true
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= builder-name:qGtArP3UaBSwjDmdbUIQM+Of8ARrAfC2AOp+fUXRNLI=
 substituters = ssh://root@23.88.58.221
 '';
 */
