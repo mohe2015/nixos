@@ -163,7 +163,7 @@ substituters = ssh://root@23.88.58.221
     timeoutStartSec = "2min";
   };
 */
-/*
+
   containers.pi = {
     config = {
       imports = [
@@ -178,7 +178,7 @@ substituters = ssh://root@23.88.58.221
     autoStart = true;
     timeoutStartSec = "2min";
   };
-*/
+
   networking.nat.enable = true;
   networking.nat.internalInterfaces = ["ve-+"];
   networking.nat.externalInterface = "enp1s0";

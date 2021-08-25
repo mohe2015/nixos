@@ -17,7 +17,10 @@ nix build .#nixosConfigurations.nixSD.config.system.build.sdImage
 
 nix run github:ryantm/agenix -- -e pi-smallstep-intermediate-password.age
 
-nix run github:ryantm/agenix -- agenix --rekey
+# ssh-add ~/.ssh/id_ed25519
+# nix run github:ryantm/agenix -- -r -i /home/moritz/.ssh/id_ed25519
+
+sudo nix run github:ryantm/agenix -- -r -i /etc/ssh/ssh_host_ed25519_key
 
 https://github.com/NixOS/nix/issues/1118
 
