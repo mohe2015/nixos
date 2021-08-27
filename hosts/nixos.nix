@@ -7,7 +7,7 @@
     ../users/moritz
     ../users/root
     ../profiles/home/earlyoom
-    ../profiles/gnome.nix
+    #../profiles/gnome.nix
 #    ../profiles/home/peertube
 #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
@@ -143,8 +143,8 @@ substituters = ssh://root@23.88.58.221
 
   services.xserver.libinput.enable = true;
 
-  #services.xserver.displayManager.sddm.enable = true;
-  #services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
   # https://gvolpe.com/blog/gnome3-on-nixos/
 /*
   containers.pi = {
