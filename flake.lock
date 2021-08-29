@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1629604291,
-        "narHash": "sha256-aeZjd2MQ4eWRla1Ro+8c2gNJc8Dzz8HBlkDGQWiR2tQ=",
+        "lastModified": 1630076227,
+        "narHash": "sha256-p3YdtqSPLnMudWsLMgd6XMEhQKB2oz1hvDkHtOlz5/Q=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9f2b766d0f46fcc87881531e6a86eba514b8260d",
+        "rev": "f5adb9be829f487f99bcc0f1884f74ddb85f70c8",
         "type": "github"
       },
       "original": {
@@ -78,7 +78,7 @@
     },
     "nixpkgs": {
       "locked": {
-        "narHash": "sha256-rIGnB8MrD9eASLS6ANjwG1DYwcR6P4NM4me8yxc50Ns=",
+        "narHash": "sha256-1J/LuchUkJJ4scEPiLAN7fOZf1jTENUIx9iZUEJ0MI0=",
         "path": "nixpkgs",
         "type": "path"
       },
@@ -89,16 +89,16 @@
     },
     "release": {
       "locked": {
-        "lastModified": 1630065431,
-        "narHash": "sha256-Zdag76/hHM3c2SwMO9w4gAd4RsS6sD7c89j/ZZjQQWs=",
-        "owner": "NixOS",
+        "lastModified": 1629919337,
+        "narHash": "sha256-zTjFaGVnAOuw2iFm6rE3bGMs1CZgovMzTCsxvprQwTg=",
+        "owner": "mohe2015",
         "repo": "nixpkgs",
-        "rev": "80cf67ff600689bff69d52166f567ab74ed50561",
+        "rev": "959cd8bd44811bd6b8475e2b9555b7fd7ebf45fa",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "release-21.05",
+        "owner": "mohe2015",
+        "ref": "backport-135361-to-release-21.05",
         "repo": "nixpkgs",
         "type": "github"
       }

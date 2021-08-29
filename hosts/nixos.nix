@@ -3,7 +3,7 @@
   ### root password is empty by default ###
   imports = [
     ../profiles/core
-    #../profiles/prisma
+    ../profiles/prisma
     ../users/moritz
     ../users/root
     ../profiles/home/earlyoom
@@ -146,7 +146,7 @@ substituters = ssh://root@23.88.58.221
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   # https://gvolpe.com/blog/gnome3-on-nixos/
-/*
+
   containers.pi = {
     nixpkgs = release;
     config = {
@@ -162,8 +162,8 @@ substituters = ssh://root@23.88.58.221
     autoStart = true;
     timeoutStartSec = "2min";
   };
-*/
 
+/*
   containers.pi = {
     config = {
       imports = [
@@ -178,7 +178,7 @@ substituters = ssh://root@23.88.58.221
     autoStart = true;
     timeoutStartSec = "2min";
   };
-
+*/
   networking.nat.enable = true;
   networking.nat.internalInterfaces = ["ve-+"];
   networking.nat.externalInterface = "enp1s0";

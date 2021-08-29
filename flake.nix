@@ -26,7 +26,7 @@
       home-manager.url = "github:nix-community/home-manager";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
       flake-utils.url = "github:numtide/flake-utils";
-      release.url = "github:NixOS/nixpkgs/release-21.05";
+      release.url = "github:mohe2015/nixpkgs/backport-135361-to-release-21.05";
       home-manager-release.url = "github:nix-community/home-manager/release-21.05";
       home-manager-release.inputs.nixpkgs.follows = "release";
 #      nixpkgs-mozilla.url = "github:mohe2015/nixpkgs-mozilla/flake";
