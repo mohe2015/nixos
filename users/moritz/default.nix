@@ -76,25 +76,31 @@
       gnomeExtensions.dash-to-dock
     ];
 
-#    programs.ssh = {
-#      enable = true;
-#    };
+    programs.ssh = {
+      enable = true;
+      #startAgent = true;
+    };
 
     #programs.fish = {
     #  enable = true;
     #};
   };
 
-  programs.ssh = {
-    startAgent = true;
+  programs.java = {
+    enable = true;
   };
+
+#  programs.ssh = {
+#    enable = true;
+#    startAgent = true;
+#  };
   
   users.users.moritz = {
     uid = 1000;
     hashedPassword = "$6$KycoTiPm3n.Mayc$7ZDSUvfXEP7zsyDGslx/C5HIbM.fZlfbK0ppsRHSbVNb6O8AqSbF1sjUsSkzEthDneean2fYtEQm.KGZYNbS.1";
     description = "default";
     isNormalUser = true;
-    extraGroups = [ "wheel" "wireshark" "docker" "adbusers" ];
+    extraGroups = [ "wheel" "wireshark" "docker" "adbusers" "scanner" "lp" ];
   };
 
   time.timeZone = "Europe/Berlin";
