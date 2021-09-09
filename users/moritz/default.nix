@@ -76,10 +76,10 @@
       gnomeExtensions.dash-to-dock
     ];
 
-    programs.ssh = {
-      enable = true;
+#    programs.ssh = {
+#      enable = true;
       #startAgent = true;
-    };
+#    };
 
     #programs.fish = {
     #  enable = true;
@@ -90,10 +90,9 @@
     enable = true;
   };
 
-#  programs.ssh = {
-#    enable = true;
-#    startAgent = true;
-#  };
+  programs.ssh = {
+    startAgent = true;
+  };
   
   users.users.moritz = {
     uid = 1000;
