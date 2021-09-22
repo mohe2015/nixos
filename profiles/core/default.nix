@@ -8,7 +8,9 @@ in
   nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable.override {
+      patches = [ ./unset-is-macho.patch ];
+    };
 
     useSandbox = true;
 

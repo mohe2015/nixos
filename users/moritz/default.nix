@@ -25,7 +25,7 @@
       #pkgs.multimc
       pkgs.minecraft
       pkgs.sshfs
-      #pkgs.rustup
+      pkgs.rustup
       pkgs.gcc
       #pkgs.chromium
       pkgs.ktorrent
