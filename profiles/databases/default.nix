@@ -15,13 +15,14 @@
   };
 
   services.postgresql = {
-    package = pkgs.postgresql_13;
+    package = pkgs.postgresql_14;
     enable = true;
     ensureUsers = [
       {
         name = "moritz";
         ensurePermissions = {
           "DATABASE moritz" = "ALL PRIVILEGES";
+          "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
         };
       }
     ];

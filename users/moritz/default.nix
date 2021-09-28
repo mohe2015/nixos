@@ -13,7 +13,7 @@
     home.packages = with pkgs; [
       pkgs.hcloud
       pkgs.wget
-      pkgs.veracrypt
+      #pkgs.veracrypt
       pkgs.tor-browser-bundle-bin
       pkgs.sqlite
       pkgs.sqlite.dev
@@ -23,7 +23,7 @@
       pkgs.htop
       pkgs.kicad
       #pkgs.multimc
-      pkgs.minecraft
+      #pkgs.minecraft
       pkgs.sshfs
       pkgs.rustup
       pkgs.gcc
@@ -41,8 +41,8 @@
       pkgs.git-lfs
       pkgs.gnupg
       pkgs.vlc
-      #pkgs.vscodium
-      pkgs.vscode
+      pkgs.vscodium
+      #pkgs.vscode
       pkgs.discord
       pkgs.libreoffice-fresh
       pkgs.texlive.combined.scheme-full
@@ -57,7 +57,7 @@
       pkgs.jdk
       pkgs.ark
       pkgs.gh
-      pkgs.androidStudioPackages.canary
+      #pkgs.androidStudioPackages.canary
       # pkgs.pdfsam-basic
       pkgs.kubectl
       pkgs.krew

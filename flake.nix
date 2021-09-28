@@ -44,17 +44,17 @@
           system = "x86_64-linux";
           #overlays = [ nixpkgs-mozilla.overlays.firefox ];
           config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-            "steam" "steam-original" "steam-runtime"
-            "discord" "discord-ptb" "discord-canary" # run in browser?
-            "android-studio-canary"
-            "thunderbird-bin"
-            "firefox-release-bin-unwrapped"
-            "firefox-bin"
-            "thunderbird-bin"
-            "firefox-beta-bin" "firefox-beta-bin-unwrapped"
-            "vscode"
-            "minecraft-launcher"
-            "veracrypt"
+#            "steam" "steam-original" "steam-runtime"
+             "discord" # run in browser?
+#            "android-studio-canary"
+#            "thunderbird-bin"
+#            "firefox-release-bin-unwrapped"
+#            "firefox-bin"
+#            "thunderbird-bin"
+#            "firefox-beta-bin" "firefox-beta-bin-unwrapped"
+#            "vscode"
+#            "minecraft-launcher"
+#            "veracrypt"
           ];
         };
       in nixpkgs.lib.nixosSystem {
