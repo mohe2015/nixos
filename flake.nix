@@ -46,6 +46,7 @@
           config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
 #            "steam" "steam-original" "steam-runtime"
              "discord" # run in browser?
+             "zoom"
 #            "android-studio-canary"
 #            "thunderbird-bin"
 #            "firefox-release-bin-unwrapped"

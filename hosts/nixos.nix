@@ -5,6 +5,7 @@
     ../profiles/core
     ../profiles/prisma
     ../users/moritz
+    ../users/tu
     ../users/root
     ../profiles/home/earlyoom
     ../profiles/databases
