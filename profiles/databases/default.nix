@@ -15,7 +15,7 @@
   };
 
   services.postgresql = {
-    package = pkgs.postgresql_15;
+    package = pkgs.postgresql_14;
     enable = true;
     ensureUsers = [
       {
