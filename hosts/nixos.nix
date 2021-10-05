@@ -2,6 +2,7 @@
 {
   ### root password is empty by default ###
   imports = [
+    ./cachix.nix
     ../profiles/core
     ../profiles/prisma
     ../users/moritz
@@ -35,7 +36,7 @@ trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDS
 substituters = ssh://root@23.88.58.221
 '';
 */
-  networking.firewall.enable = false; # kubernetes
+  #networking.firewall.enable = false; # kubernetes
 
   programs.java.enable = true;
 
@@ -127,8 +128,8 @@ substituters = ssh://root@23.88.58.221
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelModules = [ "kvm-amd" "v4l2loopback" "ceph" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.kernelModules = [ "kvm-amd" "v4l2loopback" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
   hardware.cpu.amd.updateMicrocode = true;
 
@@ -226,5 +227,5 @@ substituters = ssh://root@23.88.58.221
 
   system.stateVersion = "21.05";
 
-  #boot.binfmt.emulatedSystems = [ "aarch64-linux" ];   
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];   
 }
