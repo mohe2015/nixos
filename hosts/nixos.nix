@@ -2,7 +2,7 @@
 {
   ### root password is empty by default ###
   imports = [
-    ./cachix.nix
+    ../cachix.nix
     ../profiles/core
     ../profiles/prisma
     ../users/moritz
