@@ -11,32 +11,32 @@
     };
 
     home.packages = with pkgs; [
-      pkgs.hcloud
-      pkgs.wget
+#      pkgs.hcloud
+#      pkgs.wget
       #pkgs.veracrypt
       pkgs.tor-browser-bundle-bin
-      pkgs.sqlite
-      pkgs.sqlite.dev
-      pkgs.pkg-config
-      pkgs.binutils
+#      pkgs.sqlite
+#      pkgs.sqlite.dev
+#      pkgs.pkg-config
+#      pkgs.binutils
       pkgs.plasma-systemmonitor
       pkgs.htop
-      pkgs.kicad
+#      pkgs.kicad
       #pkgs.multimc
       #pkgs.minecraft
-      pkgs.sshfs
-      pkgs.rustup
-      pkgs.gcc
+#      pkgs.sshfs
+#      pkgs.rustup
+#      pkgs.gcc
       #pkgs.chromium
-      pkgs.ktorrent
+#      pkgs.ktorrent
       pkgs.lyx
-      pkgs.kmix
-      pkgs.git-crypt
+#      pkgs.kmix
+#      pkgs.git-crypt
       pkgs.signal-desktop
       pkgs.xournalpp
       pkgs.thunderbird
       pkgs.firefox
-      pkgs.eclipses.eclipse-java
+#      pkgs.eclipses.eclipse-java
       pkgs.git
       pkgs.git-lfs
       pkgs.gnupg
@@ -46,34 +46,34 @@
       pkgs.discord
       pkgs.libreoffice-fresh
       pkgs.texlive.combined.scheme-full
-      pkgs.unzip
-      pkgs.obs-studio
-      pkgs.wireshark
+#      pkgs.unzip
+#      pkgs.obs-studio
+#      pkgs.wireshark
       #pkgs.racket
       pkgs.hunspell
       pkgs.hunspellDicts.de-de
       pkgs.hunspellDicts.en-us
-      pkgs.jetbrains.idea-community
-      pkgs.jdk
+ #     pkgs.jetbrains.idea-community
+ #     pkgs.jdk
       pkgs.ark
       pkgs.gh
       #pkgs.androidStudioPackages.canary
       # pkgs.pdfsam-basic
-      pkgs.kubectl
-      pkgs.krew
-      pkgs.kubernetes-helm
+#     pkgs.kubectl
+#      pkgs.krew
+ #     pkgs.kubernetes-helm
 
       # https://gvolpe.com/blog/gnome3-on-nixos/
       # gnome3 apps
-      gnome3.eog    # image viewer
-      gnome3.evince # pdf reader
+ #     gnome3.eog    # image viewer
+ #     gnome3.evince # pdf reader
 
       # desktop look & feel
-      gnome3.gnome-tweak-tool
+ #     gnome3.gnome-tweak-tool
 
       # extensions
-      gnomeExtensions.appindicator
-      gnomeExtensions.dash-to-dock
+#      gnomeExtensions.appindicator
+#      gnomeExtensions.dash-to-dock
     ];
 
 #    programs.ssh = {

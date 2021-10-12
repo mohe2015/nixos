@@ -1,14 +1,16 @@
 { config, lib, pkgs, ... }:
 {
+  services.httpd.adminAddr = "root@localhost";
+  
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/wordpress.nix
-  services.wordpress = {
+  services.wordpress.sites = {
     "blog.pi.example.org" = {
-#      package = pkgs.wordpress-core;
+      package = pkgs.wordpress.override { withDefaultPluginsAndThemes = false; };
 #      mutableWpContent = true;
-      virtualHost = {
-        forceSSL = true;
-        enableACME = true;
-      };
+      #virtualHost = {
+      #  forceSSL = true;
+      #  enableACME = true;
+      #};
     };
   };
 

@@ -2,15 +2,16 @@
 {
   ### root password is empty by default ###
   imports = [
-    ../cachix.nix
+    #../cachix.nix
     ../profiles/core
-    ../profiles/prisma
+   # ../profiles/prisma
     ../users/moritz
     ../users/tu
     ../users/root
     ../profiles/home/earlyoom
     ../profiles/databases
     #../profiles/gnome.nix
+#    ../profiles/home/wordpress
 #    ../profiles/home/peertube
 #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
@@ -40,10 +41,10 @@ substituters = ssh://root@23.88.58.221
 
   programs.java.enable = true;
 
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.gutenprint ];
+  #services.printing.enable = true;
+  #services.printing.drivers = [ pkgs.gutenprint ];
 
-  hardware.sane.enable = true;
+  #hardware.sane.enable = true;
 
   #documentation.nixos.enable = false;
 
@@ -57,16 +58,16 @@ substituters = ssh://root@23.88.58.221
   #programs.adb.enable = true;
   #programs.npm.enable = true;
 
-  services.avahi.enable = true;
+  ##services.avahi.enable = true;
   #services.avahi.nssmdns = true;
   # STUPID PRINTER https://nixos.wiki/wiki/Printing
-  services.avahi.nssmdns = false; # Use the settings from below
+  ##services.avahi.nssmdns = false; # Use the settings from below
   # settings from avahi-daemon.nix where mdns is replaced with mdns4
-  system.nssModules = with pkgs.lib; optional (!config.services.avahi.nssmdns) pkgs.nssmdns;
-  system.nssDatabases.hosts = with pkgs.lib; optionals (!config.services.avahi.nssmdns) (mkMerge [
-    (mkOrder 900 [ "mdns4_minimal [NOTFOUND=return]" ]) # must be before resolve
-    (mkOrder 1501 [ "mdns4" ]) # 1501 to ensure it's after dns
-  ]);
+  ##system.nssModules = with pkgs.lib; optional (!config.services.avahi.nssmdns) pkgs.nssmdns;
+  ##system.nssDatabases.hosts = with pkgs.lib; optionals (!config.services.avahi.nssmdns) (mkMerge [
+  ##  (mkOrder 900 [ "mdns4_minimal [NOTFOUND=return]" ]) # must be before resolve
+  ##  (mkOrder 1501 [ "mdns4" ]) # 1501 to ensure it's after dns
+  ##]);
 
   systemd.coredump.enable = true;
 
@@ -96,10 +97,10 @@ substituters = ssh://root@23.88.58.221
   environment.systemPackages = [
     #pkgs.wireguard
     #pkgs.wireguard-tools
-    pkgs.kompose
+    #pkgs.kompose
     pkgs.gnome3.adwaita-icon-theme # bugfix for xournalpp https://github.com/xournalpp/xournalpp/issues/999
     agenix.defaultPackage.x86_64-linux
-    pkgs.gnome3.gnome-settings-daemon
+    #pkgs.gnome3.gnome-settings-daemon
   ];
 
   boot.loader.grub.enable = true;
@@ -128,8 +129,8 @@ substituters = ssh://root@23.88.58.221
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelModules = [ "kvm-amd" "v4l2loopback" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.kernelModules = [ "kvm-amd" /*"v4l2loopback" */];
+  #boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
   hardware.cpu.amd.updateMicrocode = true;
 
@@ -151,7 +152,7 @@ substituters = ssh://root@23.88.58.221
 
   #programs.steam.enable = true;
 
-  services.fstrim.enable = true;
+  #services.fstrim.enable = true;
 
   services.xserver.enable = true;
   services.xserver.layout = "de";
@@ -165,7 +166,7 @@ substituters = ssh://root@23.88.58.221
   services.xserver.desktopManager.plasma5.enable = true;
   # https://gvolpe.com/blog/gnome3-on-nixos/
 
-  containers.pi = {
+ /* containers.pi = {
     nixpkgs = release;
     config = {
       imports = [
@@ -180,7 +181,7 @@ substituters = ssh://root@23.88.58.221
     autoStart = true;
     timeoutStartSec = "2min";
   };
-
+*/
 /*
   containers.pi = {
     config = {
