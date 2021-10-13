@@ -5,7 +5,7 @@
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/wordpress.nix
   services.wordpress.sites = {
     "blog.pi.example.org" = {
-      package = pkgs.wordpress.override { withDefaultPluginsAndThemes = false; };
+      #package = pkgs.wordpress.override { withDefaultPluginsAndThemes = false; };
 #      mutableWpContent = true;
       #virtualHost = {
       #  forceSSL = true;

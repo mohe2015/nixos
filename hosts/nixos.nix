@@ -11,7 +11,7 @@
     ../profiles/home/earlyoom
     ../profiles/databases
     #../profiles/gnome.nix
-#    ../profiles/home/wordpress
+    ../profiles/home/wordpress
 #    ../profiles/home/peertube
 #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
