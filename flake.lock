@@ -78,7 +78,7 @@
     },
     "nixpkgs": {
       "locked": {
-        "narHash": "sha256-eohltrwemsLOHS5A3BxDb6KsN7Hfs+ffteU+YjLRZbo=",
+        "narHash": "sha256-8P4ShUNaDwvckKuhZKJZexQ2C5P/uEq6O6RNTMe8874=",
         "path": "/etc/nixos/nixpkgs",
         "type": "path"
       },
