@@ -1,4 +1,4 @@
-{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-manager-release, ... }:
+args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-manager-release, ... }:
 {
   ### root password is empty by default ###
   imports = [
@@ -11,7 +11,7 @@
     ../profiles/home/earlyoom
     ../profiles/databases
     #../profiles/gnome.nix
-    ../profiles/home/wordpress
+    (import ../profiles/home/wordpress ( args ))
 #    ../profiles/home/peertube
 #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
