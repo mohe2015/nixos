@@ -1,7 +1,11 @@
 { config, lib, pkgs, nixpkgs, ... }:
 
 let wp4nixPackages = pkgs.callPackage "${nixpkgs}/pkgs/servers/web-apps/wordpress/themes-and-plugins" {
-   wp4nixDirectory = ../../../wordpress;
+  plugins = builtins.fromJSON (builtins.readFile ../../../wordpress/plugins.json);
+  themes = builtins.fromJSON (builtins.readFile ../../../wordpress/themes.json);
+  languages = builtins.fromJSON (builtins.readFile ../../../wordpress/languages.json);
+  pluginLanguages = builtins.fromJSON (builtins.readFile ../../../wordpress/pluginLanguages.json);
+  themeLanguages = builtins.fromJSON (builtins.readFile ../../../wordpress/themeLanguages.json);
 };
 in
 {
@@ -11,7 +15,6 @@ in
   services.wordpress.sites = {
     "blog.pi.example.org" = {
       package = pkgs.wordpress.override { wpPlugins = [ wp4nixPackages.plugins.gutenberg ]; wpThemes = [ pkgs.wordpressPackages.themes.twentytwentyone wp4nixPackages.themes.tt1-blocks ]; };
-      #plugins = [ pkgs.wordpressPackages.themes.twentytwentyone ];
 #      mutableWpContent = true;
       #virtualHost = {
       #  forceSSL = true;
