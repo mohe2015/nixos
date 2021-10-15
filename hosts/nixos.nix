@@ -11,7 +11,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../profiles/home/earlyoom
     ../profiles/databases
     #../profiles/gnome.nix
-    (import ../profiles/home/wordpress ( args ))
+    #(import ../profiles/home/wordpress ( args ))
 #    ../profiles/home/peertube
 #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
@@ -143,12 +143,63 @@ substituters = ssh://root@23.88.58.221
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  hardware.firmware = [
-    (pkgs.runCommandNoCC "firmware-audio-retask" { } ''
-      mkdir -p $out/lib/firmware/
-      cp ${../hda-jack-retask.fw} $out/lib/firmware/hda-jack-retask.fw
-    '')
-  ];
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
+  # I think my model is actually correct, just the driver does not 100% what I want
+  #boot.extraModprobeConfig = ''
+  #options snd-hda-intel model=YOUR_MODEL 
+  #'';
+  # line_in_auto_switch
+  # hp_mic_detect = false
+  # add_hp_mic
+
+  # arecord -f S16_LE -d 10 -r 16000 /tmp/test-mic.wav
+  #  aplay /tmp/test-mic.wav 
+
+  # https://www.kernel.org/doc/html/latest/sound/hd-audio/notes.html#hd-audio-reconfiguration
+  # echo "auto_mic = false" > /sys/class/sound/hwC1D0/hints
+
+
+  # https://nixos.wiki/wiki/ALSA contains really useful info at the end
+
+  # systemctl --user mask pulseaudio.socket && systemctl --user stop pulseaudio
+  # sudo rmmod snd-hda-intel
+
+  # TODO dmesg | grep hda
+
+  # https://www.kernel.org/doc/html/latest/sound/hd-audio/models.html
+
+  # add_hp_mic hp_mic_detect auto_mic
+
+  # pacmd list-sources > headset
+  # pacmd list-sources > speaker
+  # https://unix.stackexchange.com/questions/348823/how-to-force-pulseaudio-ports-to-be-available
+  # pacmd list-cards
+  # shows profiles usually these are at fault
+  # pacmd set-card-profile 1 output:analog-stereo+input:analog-stereo
+  # in my case another profile does not help
+  # https://www.kernel.org/doc/html/latest/sound/hd-audio/notes.html#hd-audio-reconfiguration
+
+  # options snd-hda-intel model=hp-dv5
+  # /etc/modprobe.d/modprobe.conf
+
+  # https://help.ubuntu.com/community/HdaIntelSoundHowto
+  # cat /proc/asound/card*/codec* | grep Codec
+  # Codec: Realtek ALC236
+  # https://bbs.archlinux.org/viewtopic.php?id=254354
+
+  # https://github.com/torvalds/linux/blob/master/Documentation/sound/hd-audio/models.rst
+
+  # in alsa-tools: hdajackretask
+  # nix run nixpkgs#pavucontrol
+  # https://askubuntu.com/questions/1267949/how-do-i-automatically-switch-pulseaudio-input-to-headset-upon-connection
+
+  #hardware.firmware = [
+  #  (pkgs.runCommandNoCC "firmware-audio-retask" { } ''
+  #    mkdir -p $out/lib/firmware/
+  #    cp ${../hda-jack-retask.fw} $out/lib/firmware/hda-jack-retask.fw
+  #  '')
+  #];
 
   #programs.steam.enable = true;
 
@@ -224,7 +275,7 @@ substituters = ssh://root@23.88.58.221
   #  '';
   #};
 
-  security.pki.certificateFiles = [ ../secrets/root_ca.crt ../secrets/intermediate_ca.crt ];
+  #security.pki.certificateFiles = [ ../secrets/root_ca.crt ../secrets/intermediate_ca.crt ];
 
   system.stateVersion = "21.05";
 
