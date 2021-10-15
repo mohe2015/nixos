@@ -237,14 +237,16 @@ aplay --device=hw:1,0 /tmp/test-mic.wav
   # nix run nixpkgs#pavucontrol
   # https://askubuntu.com/questions/1267949/how-do-i-automatically-switch-pulseaudio-input-to-headset-upon-connection
 
-  #hardware.firmware = [
-  #  (pkgs.runCommandNoCC "firmware-audio-retask" { } ''
-  #    mkdir -p $out/lib/firmware/
-  #    cp ${../hda-jack-retask.fw} $out/lib/firmware/hda-jack-retask.fw
-  #  '')
-  #];
-
+  
 */
+  # this file has been generated using hdajackretask and overriding "Black Mic, Right Side" to "Not Connected"
+  hardware.firmware = [
+    (pkgs.runCommandNoCC "firmware-audio-retask" { } ''
+      mkdir -p $out/lib/firmware/
+      cp ${../hda-jack-retask.fw} $out/lib/firmware/hda-jack-retask.fw
+    '')
+  ];
+
 
   #programs.steam.enable = true;
 
