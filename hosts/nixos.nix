@@ -145,19 +145,62 @@ substituters = ssh://root@23.88.58.221
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
+  # easiest solution: hdajackretask
+/*
+nix shell nixpkgs#tree nixpkgs#psmisc nixpkgs#alsaTools
+hdajackretask
+
+alsa-info
+
+alsactl
+name 'Capture Switch'
+
+
+
+# my device doesnt seem to suppport dynamic reconfig
+# it does: The codec is being used, can't reconfigure.
+# just pulseaudio probably needs to be stopped
+
+pacmd list-sources
+
+
+[    3.435049] snd_hda_codec_realtek hdaudioC1D0: autoconfig for ALC236: line_outs=1 (0x14/0x0/0x0/0x0/0x0) type:speaker
+[    3.435147] snd_hda_codec_realtek hdaudioC1D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)
+[    3.435148] snd_hda_codec_realtek hdaudioC1D0:    hp_outs=1 (0x21/0x0/0x0/0x0/0x0)
+[    3.435149] snd_hda_codec_realtek hdaudioC1D0:    mono: mono_out=0x0
+[    3.435150] snd_hda_codec_realtek hdaudioC1D0:    inputs:
+[    3.435151] snd_hda_codec_realtek hdaudioC1D0:      Mic=0x19
+[    3.435152] snd_hda_codec_realtek hdaudioC1D0:      Internal Mic=0x12
+
+
+snd_hda_codec_realtek
+
+
+amixer --card 1 contents
+
+
+
   # I think my model is actually correct, just the driver does not 100% what I want
   #boot.extraModprobeConfig = ''
   #options snd-hda-intel model=YOUR_MODEL 
   #'';
+
+
+arecord --device=hw:1,0 -f S32_LE -d 10 -r 44100 -c 2 /tmp/test-mic.wav
+aplay --device=hw:1,0 /tmp/test-mic.wav
+
+  # https://www.kernel.org/doc/html/latest/sound/hd-audio/notes.html#hd-audio-reconfiguration
+  # echo "auto_mic = false" | sudo tee /sys/class/sound/hwC1D0/hints
+  # echo "hp_mic_detect = false" | sudo tee /sys/class/sound/hwC1D0/hints
+  # echo "add_hp_mic = true" | sudo tee /sys/class/sound/hwC1D0/hints
+  # echo 1 | tee /sys/class/sound/hwC1D0/reconfig
+  # TODO FIXME test this again after reboot and disabling pulseaudio
+
   # line_in_auto_switch
   # hp_mic_detect = false
   # add_hp_mic
 
-  # arecord -f S16_LE -d 10 -r 16000 /tmp/test-mic.wav
-  #  aplay /tmp/test-mic.wav 
-
-  # https://www.kernel.org/doc/html/latest/sound/hd-audio/notes.html#hd-audio-reconfiguration
-  # echo "auto_mic = false" > /sys/class/sound/hwC1D0/hints
+  # pacmd set-source-port 2 analog-input-internal-mic
 
 
   # https://nixos.wiki/wiki/ALSA contains really useful info at the end
@@ -184,13 +227,13 @@ substituters = ssh://root@23.88.58.221
   # /etc/modprobe.d/modprobe.conf
 
   # https://help.ubuntu.com/community/HdaIntelSoundHowto
-  # cat /proc/asound/card*/codec* | grep Codec
+  # cat /proc/asound/card* /codec* | grep Codec
   # Codec: Realtek ALC236
   # https://bbs.archlinux.org/viewtopic.php?id=254354
 
   # https://github.com/torvalds/linux/blob/master/Documentation/sound/hd-audio/models.rst
 
-  # in alsa-tools: hdajackretask
+  # nix shell nixpkgs#alsaTools: hdajackretask
   # nix run nixpkgs#pavucontrol
   # https://askubuntu.com/questions/1267949/how-do-i-automatically-switch-pulseaudio-input-to-headset-upon-connection
 
@@ -200,6 +243,8 @@ substituters = ssh://root@23.88.58.221
   #    cp ${../hda-jack-retask.fw} $out/lib/firmware/hda-jack-retask.fw
   #  '')
   #];
+
+*/
 
   #programs.steam.enable = true;
 
