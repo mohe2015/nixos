@@ -9,6 +9,7 @@
       pkgs.keepassxc
       pkgs.zoom-us
       pkgs.git
+      pkgs.vscodium
     ];
   };
   

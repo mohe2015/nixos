@@ -23,7 +23,7 @@
   inputs =
     {
       nixpkgs.url = "path:/etc/nixos/nixpkgs";
-#      nixpkgs.url = "github:NixOS/nixpkgs";
+#      nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
       home-manager.url = "github:nix-community/home-manager";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
       flake-utils.url = "github:numtide/flake-utils";
