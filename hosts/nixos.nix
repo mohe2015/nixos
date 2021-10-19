@@ -39,7 +39,24 @@ substituters = ssh://root@23.88.58.221
 */
   #networking.firewall.enable = false; # kubernetes
 
+security.rtkit.enable = true;
+services.pipewire = {
+  enable = true;
+  alsa.enable = true;
+  alsa.support32Bit = true;
+  pulse.enable = true;
+  # If you want to use JACK applications, uncomment this
+  jack.enable = true;
+
+  # use the example session manager (no others are packaged yet so this is enabled by default,
+  # no need to redefine it in your config for now)
+  #media-session.enable = true;
+};
+
+
   programs.java.enable = true;
+
+  programs.zsh.enable = true;
 
   #services.printing.enable = true;
   #services.printing.drivers = [ pkgs.gutenprint ];
@@ -141,9 +158,10 @@ substituters = ssh://root@23.88.58.221
   hardware.opengl.package = pkgs.mesa.drivers;
   hardware.opengl.extraPackages = [ pkgs.mesa pkgs.amdvlk ];
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  # commented out for pulseaudio
+  #sound.enable = true;
+  #hardware.pulseaudio.enable = true;
+  #hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   # easiest solution: hdajackretask
 /*
@@ -261,6 +279,7 @@ aplay --device=hw:1,0 /tmp/test-mic.wav
   services.xserver.libinput.enable = true;
 
   services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.defaultSession = "plasma";
   services.xserver.desktopManager.plasma5.enable = true;
   # https://gvolpe.com/blog/gnome3-on-nixos/
 

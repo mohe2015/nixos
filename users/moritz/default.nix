@@ -10,6 +10,8 @@
       signing.key = "1248D3E11D114A8575C989346794D45A488C2EDE";
     };
 
+    programs.bash.enable = true;
+
     home.packages = with pkgs; [
 #      pkgs.hcloud
 #      pkgs.wget
