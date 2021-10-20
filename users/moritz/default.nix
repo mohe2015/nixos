@@ -13,6 +13,9 @@
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      config = {
+        input = { "*" = { xkb_layout = "de"; } ; };
+      };
     };
 
     home.sessionVariables = {
