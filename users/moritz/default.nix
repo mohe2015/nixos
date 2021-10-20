@@ -12,10 +12,26 @@
 
     wayland.windowManager.sway = {
       enable = true;
+      xwayland = false;
       wrapperFeatures.gtk = true;
       config = {
+        menu = "wofi --show run";
         input = { "*" = { xkb_layout = "de"; } ; };
+        bars = [{
+          command = "${pkgs.waybar}/bin/waybar";
+        }];
       };
+      extraConfig = ''
+        xwayland disable
+
+        bindsym XF86MonBrightnessDown exec "${pkgs.brightnessctl}/bin/brightnessctl set 2%-"
+        bindsym XF86MonBrightnessUp exec "${pkgs.brightnessctl}/bin/brightnessctl set +2%"
+
+        bindsym XF86AudioRaiseVolume exec '${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +1%'
+        bindsym XF86AudioLowerVolume exec '${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -1%'
+        bindsym XF86AudioMute exec '${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle'
+        bindsym XF86AudioMicMute exec ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle
+      '';
     };
 
     home.sessionVariables = {
@@ -33,7 +49,12 @@
       mako # notification daemon
       alacritty # Alacritty is the default terminal in the config
       wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
+      slurp
+      grim
+      sway-contrib.grimshot
 
+      alsaUtils
+      #pkgs.qjackctl
       #      pkgs.hcloud
       #      pkgs.wget
       #pkgs.veracrypt
@@ -70,7 +91,7 @@
       pkgs.libreoffice-fresh
       pkgs.texlive.combined.scheme-full
       #      pkgs.unzip
-      #      pkgs.obs-studio
+      pkgs.obs-studio
       #      pkgs.wireshark
       #pkgs.racket
       pkgs.hunspell
@@ -122,7 +143,7 @@
     hashedPassword = "$6$KycoTiPm3n.Mayc$7ZDSUvfXEP7zsyDGslx/C5HIbM.fZlfbK0ppsRHSbVNb6O8AqSbF1sjUsSkzEthDneean2fYtEQm.KGZYNbS.1";
     description = "default";
     isNormalUser = true;
-    extraGroups = [ "wheel" "wireshark" "docker" "adbusers" "scanner" "lp" ];
+    extraGroups = [ "wheel" "wireshark" "docker" "adbusers" "scanner" "lp" "jackaudio" ];
   };
 
   time.timeZone = "Europe/Berlin";

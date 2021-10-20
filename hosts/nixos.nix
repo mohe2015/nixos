@@ -63,6 +63,9 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     };
   };
 
+fonts.fonts = with pkgs; [
+  font-awesome
+];
 
   programs.java.enable = true;
 

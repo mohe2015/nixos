@@ -78,7 +78,7 @@
     },
     "nixpkgs": {
       "locked": {
-        "narHash": "sha256-GaCvjiTWLeDKQh3x5MMS0tcjWaFSiz1vwljwXwM6SqE=",
+        "narHash": "sha256-DHUfyw6QmgP4wLBWuHFmE6yUSCZMycnBORPqDj8Cg88=",
         "path": "/etc/nixos/nixpkgs",
         "type": "path"
       },
@@ -89,11 +89,11 @@
     },
     "release": {
       "locked": {
-        "lastModified": 1634736662,
-        "narHash": "sha256-eK08aBrg61df7QxQW/VcuwXmRLHvdHkU8hphDJ/h0M8=",
+        "lastModified": 1634749594,
+        "narHash": "sha256-5GzAKMr56XmIHDeG0YdX60Cy5fY45W0ei2VEyTGaoSk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f46390a8733096606e1ff18f393609769fa72d39",
+        "rev": "c1dd303d5d4d9da379ef8d532e9fac689ff85f28",
         "type": "github"
       },
       "original": {
