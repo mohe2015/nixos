@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 {
-    # https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/services/cluster/kubernetes
+  # https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/services/cluster/kubernetes
   services.kubernetes = {
-    roles = ["master"];
+    roles = [ "master" ];
     masterAddress = "kubernetes-primary.pi.example.org";
   };
 }

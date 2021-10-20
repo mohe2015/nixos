@@ -16,7 +16,7 @@
         x_forwarded = true; # TODO FIXME do this for the other modules too
         resources = [
           {
-            names = ["client" "federation"];
+            names = [ "client" "federation" ];
             compress = false;
           }
         ];
@@ -29,13 +29,13 @@
   };
 
   # nix run nixpkgs#element-desktop
-/*
-  initialScript = pkgs.writeText "synapse-init.sql" ''
+  /*
+    initialScript = pkgs.writeText "synapse-init.sql" ''
     DO $$
     BEGIN
-      CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
+    CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
     EXCEPTION WHEN DUPLICATE_OBJECT THEN
-      RAISE NOTICE 'not creating role matrix-synapse -- it already exists';
+    RAISE NOTICE 'not creating role matrix-synapse -- it already exists';
     END
     $$;
 
@@ -44,27 +44,27 @@
     DO $$
     BEGIN
     PERFORM dblink_exec(''', 'CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
-      TEMPLATE template0
-      LC_COLLATE = "C"
-      LC_CTYPE = "C";');
+    TEMPLATE template0
+    LC_COLLATE = "C"
+    LC_CTYPE = "C";');
     EXCEPTION WHEN duplicate_database THEN RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
     END
     $$;
-  '';
-*/
+    '';
+  */
   /*services.postgresql = {
     enable = true;
 
     ensureDatabases = [ "matrix-synapse" ]; # needs some custom options that can't be set
     ensureUsers = [
-      {
-        name = "matrix-synapse";
-        ensurePermissions = {
-          "DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
-        };
-      }
+    {
+    name = "matrix-synapse";
+    ensurePermissions = {
+    "DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
+    };
+    }
     ];
-  };*/
+    };*/
 
   systemd.services.matrix-synapse = {
     requires = [ "postgresql.service" "acme-matrix.pi.example.org" ];

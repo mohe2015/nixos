@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
   home-manager.users.nixos = {
-    imports = [  ];
+    imports = [ ];
 
     home.packages = [
       pkgs.git
       pkgs.git-crypt
-    ];    
+    ];
   };
 
   users.users.nixos = {

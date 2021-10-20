@@ -14,7 +14,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
   imports = [
-    
+
     # passwd is nixos by default
     ../users/nixos
     # passwd is empty by default
@@ -53,7 +53,7 @@
   ];
 
   networking.hostName = "nixSD";
-  
+
   #boot.loader.grub.enable = false;
   #boot.loader.raspberryPi = {
   #  enable = true;
@@ -74,12 +74,12 @@
 
   ##boot.loader.grub.device = "nodev";
   ##fileSystems."/" = { device = "/dev/disk/by-label/nixos"; fsType = "ext4"; };
-  
+
   #boot.initrd.availableKernelModules = lib.mkForce [
-    # Allows early (earlier) modesetting for the Raspberry Pi
+  # Allows early (earlier) modesetting for the Raspberry Pi
   #  "vc4" "bcm2835_dma" "i2c_bcm2835"
-    # Allows early (earlier) modesetting for Allwinner SoCs
-    # "sun4i_drm" "sun8i_drm_hdmi" "sun8i_mixer"
+  # Allows early (earlier) modesetting for Allwinner SoCs
+  # "sun4i_drm" "sun8i_drm_hdmi" "sun8i_mixer"
   #];
 
   # TODO send a fix or improve documentation
@@ -176,12 +176,12 @@
 
   # https://git.immae.eu/cgit/perso/Immae/Config/Nix.git/
 
-#  hardware.enableRedistributableFirmware = lib.mkDefault true;
-#  hardware.pulseaudio.enable = lib.mkDefault true;
-#  sound.enable = lib.mkDefault true;
+  #  hardware.enableRedistributableFirmware = lib.mkDefault true;
+  #  hardware.pulseaudio.enable = lib.mkDefault true;
+  #  sound.enable = lib.mkDefault true;
 
-#  documentation.enable = false;
-#  networking.wireless.enable = true;
+  #  documentation.enable = false;
+  #  networking.wireless.enable = true;
 
   system.stateVersion = "21.11";
 }
