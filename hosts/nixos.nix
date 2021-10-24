@@ -67,6 +67,8 @@ fonts.fonts = with pkgs; [
   font-awesome
 ];
 
+security.pam.services.swaylock = {};
+
   programs.java.enable = true;
 
   programs.zsh.enable = true;
@@ -140,7 +142,7 @@ fonts.fonts = with pkgs; [
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
 
-  #virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   #programs.wireshark.enable = true;
 
