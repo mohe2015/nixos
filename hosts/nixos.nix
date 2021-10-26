@@ -12,7 +12,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../profiles/databases
     #../profiles/gnome.nix
     #(import ../profiles/home/wordpress ( args ))
-    #    ../profiles/home/peertube
+    ../profiles/home/peertube
     #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
