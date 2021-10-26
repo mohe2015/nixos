@@ -12,7 +12,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../profiles/databases
     #../profiles/gnome.nix
     #(import ../profiles/home/wordpress ( args ))
-    ../profiles/home/peertube
+#    ../profiles/home/peertube
     #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
@@ -162,8 +162,8 @@ security.pam.services.swaylock = {};
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelModules = [ "kvm-amd" /*"v4l2loopback" */ ];
-  #boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.kernelModules = [ "kvm-amd" "v4l2loopback" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
   hardware.cpu.amd.updateMicrocode = true;
 

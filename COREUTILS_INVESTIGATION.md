@@ -13,7 +13,8 @@ git fetch --depth 1 upstream staging-next
 git checkout upstream/staging-next
 nix-build --max-jobs 32 . -A peertube
 # fails with EPIPE (tested two times)
-
+nix-build --max-jobs 32 . -A coreutils
+/nix/store/pb05l5rvhczgm7jqjy06rh34n8krk93j-coreutils-9.0
 
 
 git checkout staging-what
@@ -39,9 +40,9 @@ index 16f3e4c7..fef8dbac 100644
 
 ```
 nix-build --max-jobs 32 . -A peertube
-
-
-
+/nix/store/fydqiz1z0mx2fmrfawzhi4sxjyvcwfaz-peertube-3.4.1
+nix-build --max-jobs 32 . -A coreutils
+/nix/store/b9lhc3wk7wlcsngr9kwfy6nv84sbfv14-coreutils-8.32
 
 
 
