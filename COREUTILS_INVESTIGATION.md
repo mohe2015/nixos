@@ -1,4 +1,22 @@
-﻿Vladimír Čunát: While sleeping over it I think the miscompilation for peertube may not actually have anything to do with coreutils. As I looked at the diff and didn't see anything out of the ordinary I think the following could also be possible: When the coreutils derivation hash changes all dependent hashes change so all -frandom-seed's change too. If you still have the build products and have the time you could diffoscope the outputs of golang, yarn, esbuild_locked (oh this is annoying as its not an own attr), nodejs-16_x, nodejs-14_x
+﻿# close old terminal window
+cd /etc/nixos/nixpkgs
+git checkout f85c9264e64cf77440ffde1beb646bde614be343
+rm -f result
+sudo nix-collect-garbage -d # I'm lazy (and don't know how to pin dependencies), sorry to the binary cache
+#nix develop .#esbuild # get dependencies
+#exit
+#nix build --keep-outputs --debug --option substitute false -L .#esbuild
+
+
+git checkout f85c9264e64cf77440ffde1beb646bde614be343
+
+nix build --option substitute false .#esbuild
+
+nix-store --delete /nix/store/09d91l464srbdx1dsgj1yhfichyck8d5-esbuild-0.12.17-go-modules.drv /nix/store/hxr5n64r9i1ngg1ll0gq2whm21sk22bw-esbuild-0.12.17
+
+
+
+Vladimír Čunát: While sleeping over it I think the miscompilation for peertube may not actually have anything to do with coreutils. As I looked at the diff and didn't see anything out of the ordinary I think the following could also be possible: When the coreutils derivation hash changes all dependent hashes change so all -frandom-seed's change too. If you still have the build products and have the time you could diffoscope the outputs of golang, yarn, esbuild_locked (oh this is annoying as its not an own attr), nodejs-16_x, nodejs-14_x
 
 git clone git://git.sv.gnu.org/coreutils /tmp/coreutils
 cd /tmp/coreutils

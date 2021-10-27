@@ -39,9 +39,9 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
   */
   #networking.firewall.enable = false; # kubernetes
 
-  nix.useSandbox = lib.mkForce false;
+#  nix.useSandbox = lib.mkForce false;
 
-  boot.tmpOnTmpfs = true;
+#  boot.tmpOnTmpfs = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
