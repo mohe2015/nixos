@@ -1,3 +1,20 @@
+﻿Vladimír Čunát: While sleeping over it I think the miscompilation for peertube may not actually have anything to do with coreutils. As I looked at the diff and didn't see anything out of the ordinary I think the following could also be possible: When the coreutils derivation hash changes all dependent hashes change so all -frandom-seed's change too. If you still have the build products and have the time you could diffoscope the outputs of golang, yarn, esbuild_locked (oh this is annoying as its not an own attr), nodejs-16_x, nodejs-14_x
+
+git clone git://git.sv.gnu.org/coreutils /tmp/coreutils
+cd /tmp/coreutils
+git checkout v9.0
+git submodule init
+git submodule update --recursive
+git revert a6eaee501f6ec0c152abe88640203a64c390993e
+
+
+
+
+
+
+
+
+
 ./hetzner-nix-on-deb.sh -n nix-builder -t ccx52
 
 #sudo nano /etc/systemd/logind.conf
@@ -45,6 +62,7 @@ nix-build --max-jobs 32 . -A coreutils
 /nix/store/b9lhc3wk7wlcsngr9kwfy6nv84sbfv14-coreutils-8.32
 
 
+diffoscope /nix/store/pb05l5rvhczgm7jqjy06rh34n8krk93j-coreutils-9.0 /nix/store/b9lhc3wk7wlcsngr9kwfy6nv84sbfv14-coreutils-8.32
 
 
 
