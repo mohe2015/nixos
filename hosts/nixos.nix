@@ -16,6 +16,8 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
+
+nix.daemonIONiceLevel = 7;
   /*
     nix.buildMachines = [ {
     # The path to the SSH private key with which to authenticate on the build machine. The private key must not have a passphrase. If null, the building user (root on NixOS machines) must have an appropriate ssh configuration to log in non-interactively. Note that for security reasons, this path must point to a file in the local filesystem, *not* to the nix store. 

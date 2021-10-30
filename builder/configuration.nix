@@ -114,6 +114,14 @@
 
   nix.gc.automatic = true;
 
+  services.hydra = {
+    enable = true;
+    hydraURL = "http://localhost:3000";
+    notificationSender = "hydra@localhost";
+    buildMachinesFiles = [];
+    useSubstitutes = false;
+  };
+
 #  nix.extraOptions = ''
 #    secret-key-files = /root/cache-priv-key.pem
 #  '';
