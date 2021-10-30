@@ -95,7 +95,7 @@
       pkgs.vscodium
       #pkgs.vscode
       pkgs.discord
-      pkgs.libreoffice-fresh
+      pkgs.libreoffice-still
       pkgs.texlive.combined.scheme-full
       #      pkgs.unzip
       pkgs.obs-studio
