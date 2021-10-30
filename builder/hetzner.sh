@@ -32,7 +32,7 @@ hcloud server ssh $NAME 'chmod 700 /home/moritz/.ssh'
 hcloud server ssh $NAME 'chmod 600 /home/moritz/.ssh/authorized_keys'
 # create volume (don't mount it) (50GB)
 hcloud volume attach volume-nix --server $NAME
-hcloud server ssh $NAME 'sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0HC_Volume_14477825' # TODO comment this out
+#hcloud server ssh $NAME 'sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0HC_Volume_14477825' # TODO comment this out
 hcloud server ssh $NAME 'sudo mkdir -m 0755 /nix && sudo chown moritz /nix'
 hcloud server ssh $NAME 'echo "/dev/disk/by-id/scsi-0HC_Volume_14477825 /nix ext4 discard,nofail,defaults 0 0" | sudo tee -a /etc/fstab'
 hcloud server ssh $NAME 'sudo mount -a'
