@@ -10,9 +10,18 @@
       ./hardware-configuration.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # Define on which hard drive you want to install Grub.
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-  networking.hostName = "nixos"; # Define your hostname.
+  # hetzner doesnt support efi only but this would probably allow automatic rollback
+  #boot.loader.systemd-boot.enable = true;
+
+  networking.hostName = "nixos-server"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -109,11 +118,12 @@
 #    secret-key-files = /root/cache-priv-key.pem
 #  '';
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-id/scsi-0HC_Volume_14477825";
-    fsType = "ext4";
-    options = [ "discard" "nofail" "defaults" ];
-  };
+  # autodetected
+  #fileSystems."/nix" = {
+  #  device = "/dev/disk/by-id/scsi-0HC_Volume_14477825";
+  #  fsType = "ext4";
+  #  options = [ "discard" "nofail" "defaults" ];
+  #};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

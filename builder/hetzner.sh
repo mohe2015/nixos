@@ -2,7 +2,7 @@ set -ex
 
 # TODO FIXME the image currently contains the public key - maybe it can be overwritten using --user-data-from-file. But this is not so important as currently every user has to generate his image himself anyways.
 
-# ./hetzner.sh -n template -t cpx11
+# ./hetzner.sh -n nixos-server -t cpx11
 
 while getopts t:n: opts; do
    case ${opts} in
@@ -55,7 +55,11 @@ hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS'
 hcloud server ssh -u moritz $NAME 'sudo touch /etc/NIXOS_LUSTRATE'
 hcloud server ssh -u moritz $NAME 'echo etc/nixos | sudo tee -a /etc/NIXOS_LUSTRATE'
 #hcloud server ssh -u moritz $NAME 'sudo mv -v /boot /boot.bak'
-hcloud server ssh -u moritz $NAME 'sudo rm -R /boot' # to keep /boot/efi mountpoint
+hcloud server ssh -u moritz $NAME 'sudo rm -Rf /boot' || true # to keep /boot/efi mountpoint
+#hcloud server ssh -u moritz $NAME 'sudo umount /boot/efi'
+#hcloud server ssh -u moritz $NAME 'sudo mount /dev/sda15 /boot'
+#hcloud server ssh -u moritz $NAME 'sudo bootctl install'
+#hcloud server ssh -u moritz $NAME 'sudo dd if=/dev/zero of=/dev/sda bs=446 count=1'
 hcloud server ssh -u moritz $NAME 'sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot'
 
 # alternatively we could try kexec just for fun
