@@ -10,6 +10,10 @@
       modules = [ ./configuration.nix ];
     };
 
+    deploy.nodes.nixos-server = {
+      hostname = "49.12.228.186";
+    };
+
     deploy.nodes.nixos-server.profiles.system = {
         user = "root";
         path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nixos-server;
@@ -24,7 +28,7 @@
       };
     in {
       x86_64-linux = pkgs.mkShell {
-        nativeBuildInputs = [ deploy-rs.defaultPackage.x86_64-linux ];
+        nativeBuildInputs = [ deploy-rs.defaultPackage.x86_64-linux nixpkgs.legacyPackages.x86_64-linux.hcloud  ];
       };
     };
   };

@@ -48,6 +48,8 @@ hcloud server ip $NAME
 hcloud server ip --ipv6 $NAME
 
 scp configuration.nix root@$(hcloud server ip $NAME):/etc/nixos/configuration.nix
+scp root@$(hcloud server ip $NAME):/etc/nixos/hardware-configuration.nix hardware-configuration.nix
+
 
 hcloud server ssh -u moritz $NAME 'nix-env -p /nix/var/nix/profiles/system -f '"'"'<nixpkgs/nixos>'"'"' -I nixos-config=/etc/nixos/configuration.nix -iA system'
 hcloud server ssh -u moritz $NAME 'sudo chown -R 0.0 /nix'
