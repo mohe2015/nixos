@@ -2,7 +2,7 @@
 cd /etc/nixos/nixpkgs
 git checkout f85c9264e64cf77440ffde1beb646bde614be343
 rm -f result
-sudo nix-collect-garbage -d # I'm lazy (and don't know how to pin dependencies), sorry to the binary cache
+sudo nix-collect-garbage # I'm lazy (and don't know how to pin dependencies), sorry to the binary cache
 #nix develop .#esbuild # get dependencies
 #exit
 #nix build --keep-outputs --debug --option substitute false -L .#esbuild
