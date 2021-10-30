@@ -10,16 +10,9 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  boot.loader.systemd-boot.enable = true;
 
-  networking.hostName = "nixos-builder"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -29,7 +22,16 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.eth0.useDHCP = true;
+  networking.useNetworkd = true;
+
+  systemd.network.enable = true;
+  systemd.network.networks = {
+    "40-wired" = {
+      enable = true;
+      name = "en*";
+      DHCP = "yes";
+    };
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -103,9 +105,15 @@
 
   nix.gc.automatic = true;
 
-  nix.extraOptions = ''
-    secret-key-files = /root/cache-priv-key.pem
-  '';
+#  nix.extraOptions = ''
+#    secret-key-files = /root/cache-priv-key.pem
+#  '';
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-id/scsi-0HC_Volume_14477825";
+    fsType = "ext4";
+    options = [ "discard" "nofail" "defaults" ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

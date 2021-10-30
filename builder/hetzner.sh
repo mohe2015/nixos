@@ -2,7 +2,7 @@ set -ex
 
 # TODO FIXME the image currently contains the public key - maybe it can be overwritten using --user-data-from-file. But this is not so important as currently every user has to generate his image himself anyways.
 
-# ./create-nixos-image.sh -n template -t cpx11
+# ./hetzner.sh -n template -t cpx11
 
 while getopts t:n: opts; do
    case ${opts} in
@@ -30,7 +30,13 @@ hcloud server ssh $NAME 'cp .ssh/authorized_keys /home/moritz/.ssh/'
 hcloud server ssh $NAME 'chown -R moritz:moritz /home/moritz/.ssh'
 hcloud server ssh $NAME 'chmod 700 /home/moritz/.ssh'
 hcloud server ssh $NAME 'chmod 600 /home/moritz/.ssh/authorized_keys'
-hcloud server ssh $NAME 'mkdir -m 0755 /nix && chown moritz /nix'
+# create volume (don't mount it) (50GB)
+hcloud volume attach volume-nix --server $NAME
+hcloud server ssh $NAME 'sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0HC_Volume_14477825' # TODO comment this out
+hcloud server ssh $NAME 'sudo mkdir -m 0755 /nix && sudo chown moritz /nix'
+hcloud server ssh $NAME 'echo "/dev/disk/by-id/scsi-0HC_Volume_14477825 /nix ext4 discard,nofail,defaults 0 0" | sudo tee -a /etc/fstab'
+hcloud server ssh $NAME 'sudo mount -a'
+hcloud server ssh $NAME 'sudo chown moritz /nix'
 hcloud server ssh -u moritz $NAME 'curl -L https://nixos.org/nix/install | sh'
 hcloud server ssh -u moritz $NAME 'echo '"'"'if [ -e /home/moritz/.nix-profile/etc/profile.d/nix.sh ]; then . /home/moritz/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer'"'"' | cat - ~/.bashrc | tee ~/.bashrc'
 hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable-small nixpkgs'
@@ -60,7 +66,7 @@ sleep 30
 ssh-keygen -R $(hcloud server ip $NAME)
 ssh-keyscan $(hcloud server ip $NAME) >> ~/.ssh/known_hosts
 
-hcloud server ssh $NAME nix-store --generate-binary-cache-key builder-name cache-priv-key.pem cache-pub-key.pem
+#hcloud server ssh $NAME nix-store --generate-binary-cache-key builder-name cache-priv-key.pem cache-pub-key.pem
 hcloud server ssh $NAME nix-channel --update
 hcloud server ssh $NAME rm -rf /old-root
 hcloud server ssh $NAME nix-collect-garbage -d
@@ -68,8 +74,8 @@ hcloud server ssh $NAME nix-collect-garbage -d
 hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable-small nixpkgs'
 hcloud server ssh -u moritz $NAME 'nix-channel --update'
 
-hcloud server ssh $NAME cat /root/cache-pub-key.pem
-echo write this into your nixos config
+#hcloud server ssh $NAME cat /root/cache-pub-key.pem
+#echo write this into your nixos config
 
 date
 

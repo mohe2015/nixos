@@ -3,6 +3,8 @@ set -ex
 
 # ./hetzner-nix-on-deb.sh -n nix-builder -t ccx52
 
+# ./hetzner-nix-on-deb.sh -n nixos -t cx11
+
 while getopts t:n: opts; do
    case ${opts} in
       t) TYPE=${OPTARG} ;;
@@ -30,7 +32,20 @@ hcloud server ssh $NAME 'cp .ssh/authorized_keys /home/moritz/.ssh/'
 hcloud server ssh $NAME 'chown -R moritz:moritz /home/moritz/.ssh'
 hcloud server ssh $NAME 'chmod 700 /home/moritz/.ssh'
 hcloud server ssh $NAME 'chmod 600 /home/moritz/.ssh/authorized_keys'
+
+# create volume (don't mount it) (50GB)
+#sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0HC_Volume_14477825
+#sudo mkdir -m 0755 /nix && sudo chown moritz /nix
+#echo "/dev/disk/by-id/scsi-0HC_Volume_14477825 /nix ext4 discard,nofail,defaults 0 0" | sudo tee -a /etc/fstab
+#sudo mount -a
+#sudo chown moritz /nix
+
 hcloud server ssh -u moritz $NAME 'curl -L https://nixos.org/nix/install | sh -s -- --no-daemon'
+
+#sudo rm /nix/var/nix/profiles/per-user/moritz/channels-1-link
+#nix-store --gc
+
+# git clone --depth 1 --branch master https://github.com/NixOS/nixpkgs.git
 
 #sudo nano /etc/systemd/logind.conf
 #RuntimeDirectorySize=90%
