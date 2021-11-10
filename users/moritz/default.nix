@@ -93,7 +93,7 @@
       pkgs.gnupg
       pkgs.vlc
       (pkgs.vscode-with-extensions.override {
-        vscode = (pkgs.vscode.override {
+        vscode = (pkgs.vscodium.override {
       /*commandLineArgs =
         "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
         "--enable-accelerated-video-decode " +
@@ -102,7 +102,7 @@
         "--force-dark-mode " +
         "--enable-native-notifications";*/
     });
-        vscodeExtensions = with pkgs.vscode-registries.openvsx.extensions; [ ms-vscode.cpptools jnoortheen.nix-ide mshr-h.VerilogHDL ];
+#        vscodeExtensions = with pkgs.vscode-registries.openvsx.extensions; [ jnoortheen.nix-ide mshr-h.veriloghdl ];
       })
       (pkgs.chromium.override {
       /*commandLineArgs =
