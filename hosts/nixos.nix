@@ -62,10 +62,11 @@ nix.daemonIONiceLevel = 7;
     portal = {
       enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk
+        #xdg-desktop-portal-wlr
+        #xdg-desktop-portal-gtk
+        xdg-desktop-portal-kde
       ];
-      gtkUsePortal = true;
+      #gtkUsePortal = true;
     };
   };
 
@@ -303,6 +304,7 @@ security.pam.services.swaylock = {};
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.defaultSession = "plasma";
   services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.desktopManager.plasma5.runUsingSystemd = true;
   # https://gvolpe.com/blog/gnome3-on-nixos/
 
   /* containers.pi = {

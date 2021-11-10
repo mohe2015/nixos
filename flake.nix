@@ -47,13 +47,15 @@
 #            "steam" "steam-original" "steam-runtime"
              "discord" # run in browser?
              "zoom"
+             "vscode-extension-ms-vscode-cpptools"
+             "vscode-with-extensions"
 #            "android-studio-canary"
 #            "thunderbird-bin"
 #            "firefox-release-bin-unwrapped"
 #            "firefox-bin"
 #            "thunderbird-bin"
 #            "firefox-beta-bin" "firefox-beta-bin-unwrapped"
-#            "vscode"
+             "vscode"
 #            "minecraft-launcher"
 #            "veracrypt"
           ];

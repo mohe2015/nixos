@@ -76,7 +76,7 @@
       #pkgs.multimc
       #pkgs.minecraft
       #      pkgs.sshfs
-      #      pkgs.rustup
+      pkgs.rustup
       #      pkgs.gcc
       #pkgs.chromium
       #      pkgs.ktorrent
@@ -92,7 +92,30 @@
       pkgs.git-lfs
       pkgs.gnupg
       pkgs.vlc
-      pkgs.vscodium
+      (pkgs.vscode-with-extensions.override {
+        vscode = (pkgs.vscode.override {
+      /*commandLineArgs =
+        "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
+        "--enable-accelerated-video-decode " +
+        "--ozone-platform=wayland " +
+        "--enable-gpu-rasterization " +
+        "--force-dark-mode " +
+        "--enable-native-notifications";*/
+    });
+        vscodeExtensions = with pkgs.vscode-registries.openvsx.extensions; [ ms-vscode.cpptools jnoortheen.nix-ide mshr-h.VerilogHDL ];
+      })
+      (pkgs.chromium.override {
+      /*commandLineArgs =
+        "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
+        "--enable-accelerated-video-decode " +
+        "--ozone-platform=wayland " +
+        "--enable-gpu-rasterization " +
+        "--disable-sync-preferences " +
+        "--force-dark-mode " +
+        "--enable-native-notifications";*/
+    })
+
+        
       #pkgs.vscode
       pkgs.discord
       pkgs.libreoffice-still
