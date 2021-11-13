@@ -127,7 +127,7 @@
       pkgs.hunspell
       pkgs.hunspellDicts.de-de
       pkgs.hunspellDicts.en-us
-      #     pkgs.jetbrains.idea-community
+      pkgs.jetbrains.idea-community
       #     pkgs.jdk
       pkgs.ark
       pkgs.gh
