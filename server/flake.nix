@@ -11,7 +11,7 @@
     };
 
     deploy.nodes.nixos-server = {
-      hostname = "49.12.228.186";
+      hostname = "94.130.56.136";
     };
 
     deploy.nodes.nixos-server.profiles.system = {
