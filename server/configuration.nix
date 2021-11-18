@@ -70,6 +70,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  users.mutableUsers = false;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.moritz = {
     isNormalUser = true;
@@ -109,10 +111,50 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    flake = "/etc/nixos/server";
+    flags = ["--update-input" "nixpkgs" "--commit-lock-file"];
+  };
 
-  nix.gc.automatic = true;
+  nix = {
+    useSandbox = true;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    gc.automatic = true;
+  };
+
+  security.acme.email = "Moritz.Hedtke@t-online.de";
+  security.acme.acceptTerms = true;
+
+  services.matrix-conduit = {
+    enable = true;
+    nginx.enable = true;
+    settings = {
+      global = {
+        server_name = "selfmade4u.de";
+        allow_encryption = true;
+        allow_federation = true;
+        #allow_registration = true;
+      };
+    };
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."selfmade4u.de" = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/_matrix" = {
+        proxyPass = "http://[::1]:6167";
+      };
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = [ 443 80 ];
 
   #services.hydra = {
   #  enable = true;

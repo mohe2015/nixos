@@ -1,8 +1,10 @@
 {
   description = "Deployment for my server";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-  inputs.deploy-rs.url = "github:serokell/deploy-rs";
+  inputs = {
+    nixpkgs.url = "path:/etc/nixos/server/nixpkgs";
+    deploy-rs.url = "github:serokell/deploy-rs";
+  };
 
   outputs = { self, nixpkgs, deploy-rs }: {
     nixosConfigurations.nixos-server = nixpkgs.lib.nixosSystem {
