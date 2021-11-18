@@ -15,7 +15,7 @@ done
 date
 
 hcloud context use nixos
-hcloud server create --datacenter nbg1-dc3 --image debian-11 --type $TYPE --ssh-key ~/.ssh/id_rsa.pub --name $NAME
+hcloud server create --datacenter nbg1-dc3 --image debian-11 --type $TYPE --ssh-key ~/.ssh/id_ed25519.pub --name $NAME
 
 sleep 20
 

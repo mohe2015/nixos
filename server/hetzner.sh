@@ -14,7 +14,7 @@ done
 date
 
 hcloud context use nixos
-hcloud server create --datacenter nbg1-dc3 --image debian-11 --type $TYPE --ssh-key ~/.ssh/id_rsa.pub --name $NAME
+hcloud server create --datacenter nbg1-dc3 --image debian-11 --type $TYPE --ssh-key ~/.ssh/id_ed25519.pub --name $NAME
 
 sleep 20
 
@@ -31,12 +31,12 @@ hcloud server ssh $NAME 'chown -R moritz:moritz /home/moritz/.ssh'
 hcloud server ssh $NAME 'chmod 700 /home/moritz/.ssh'
 hcloud server ssh $NAME 'chmod 600 /home/moritz/.ssh/authorized_keys'
 # create volume (don't mount it) (50GB)
-hcloud volume attach volume-nix --server $NAME
+#hcloud volume attach volume-nix --server $NAME
 #hcloud server ssh $NAME 'sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0HC_Volume_14477825' # TODO comment this out
-hcloud server ssh $NAME 'sudo mkdir -m 0755 /nix && sudo chown moritz /nix'
-hcloud server ssh $NAME 'echo "/dev/disk/by-id/scsi-0HC_Volume_14477825 /nix ext4 discard,nofail,defaults 0 0" | sudo tee -a /etc/fstab'
-hcloud server ssh $NAME 'sudo mount -a'
-hcloud server ssh $NAME 'sudo chown moritz /nix'
+#hcloud server ssh $NAME 'sudo mkdir -m 0755 /nix && sudo chown moritz /nix'
+#hcloud server ssh $NAME 'echo "/dev/disk/by-id/scsi-0HC_Volume_14477825 /nix ext4 discard,nofail,defaults 0 0" | sudo tee -a /etc/fstab'
+#hcloud server ssh $NAME 'sudo mount -a'
+#hcloud server ssh $NAME 'sudo chown moritz /nix'
 hcloud server ssh -u moritz $NAME 'curl -L https://nixos.org/nix/install | sh'
 hcloud server ssh -u moritz $NAME 'echo '"'"'if [ -e /home/moritz/.nix-profile/etc/profile.d/nix.sh ]; then . /home/moritz/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer'"'"' | cat - ~/.bashrc | tee ~/.bashrc'
 hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable-small nixpkgs'
@@ -49,7 +49,6 @@ hcloud server ip --ipv6 $NAME
 
 scp configuration.nix root@$(hcloud server ip $NAME):/etc/nixos/configuration.nix
 scp root@$(hcloud server ip $NAME):/etc/nixos/hardware-configuration.nix hardware-configuration.nix
-
 
 hcloud server ssh -u moritz $NAME 'nix-env -p /nix/var/nix/profiles/system -f '"'"'<nixpkgs/nixos>'"'"' -I nixos-config=/etc/nixos/configuration.nix -iA system'
 hcloud server ssh -u moritz $NAME 'sudo chown -R 0.0 /nix'

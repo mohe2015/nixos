@@ -1,7 +1,7 @@
 {
-  description = "Deployment for my server cluster";
+  description = "Deployment for my server";
 
-  # For accessing `deploy-rs`'s utility Nix functions
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
   inputs.deploy-rs.url = "github:serokell/deploy-rs";
 
   outputs = { self, nixpkgs, deploy-rs }: {

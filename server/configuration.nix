@@ -79,6 +79,7 @@
   };
 
   users.users.root = {
+    isNormalUser = true;
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
   };
 
@@ -114,13 +115,13 @@
 
   nix.gc.automatic = true;
 
-  services.hydra = {
-    enable = true;
-    hydraURL = "http://localhost:3000";
-    notificationSender = "hydra@localhost";
-    buildMachinesFiles = [];
-    useSubstitutes = false;
-  };
+  #services.hydra = {
+  #  enable = true;
+  #  hydraURL = "http://localhost:3000";
+  #  notificationSender = "hydra@localhost";
+  #  buildMachinesFiles = [];
+  #  useSubstitutes = false;
+  #};
 
 #  nix.extraOptions = ''
 #    secret-key-files = /root/cache-priv-key.pem
