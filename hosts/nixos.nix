@@ -11,13 +11,13 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../profiles/home/earlyoom
     ../profiles/databases
     #../profiles/gnome.nix
-    #(import ../profiles/home/wordpress ( args ))
+    (import ../profiles/home/wordpress ( args ))
 #    ../profiles/home/peertube
     #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
 
-nix.daemonIONiceLevel = 7;
+#nix.daemon.IONiceLevel = 7;
   /*
     nix.buildMachines = [ {
     # The path to the SSH private key with which to authenticate on the build machine. The private key must not have a passphrase. If null, the building user (root on NixOS machines) must have an appropriate ssh configuration to log in non-interactively. Note that for security reasons, this path must point to a file in the local filesystem, *not* to the nix store. 
@@ -43,7 +43,7 @@ nix.daemonIONiceLevel = 7;
 
 #  nix.useSandbox = lib.mkForce false;
 
-#  boot.tmpOnTmpfs = true;
+  #boot.tmpOnTmpfs = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -125,7 +125,7 @@ security.pam.services.swaylock = {};
     ''
       127.0.0.1 peertube.localhost
       192.168.100.11 totallynotlocalhost.de
-      192.168.100.11 blog.pi.example.org
+      127.0.0.1 blog.pi.example.org
       192.168.100.11 mattermost.pi.example.org
       192.168.2.128 core.harbor.domain
       192.168.2.128 keycloak.local

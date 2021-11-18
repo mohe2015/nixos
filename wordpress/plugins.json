@@ -1,14 +1,14 @@
 {
   "gutenberg": {
-    "path": "gutenberg/tags/11.7.0",
-    "rev": "2613787",
-    "sha256": "0pnvxpdh286y0zfc87lis9fry9yljrizq2vcdwnf7cf90q79jj8y",
-    "version": "11.7.0"
+    "path": "gutenberg/tags/11.9.0",
+    "rev": "2627803",
+    "sha256": "1il1r7949xdnclr7p75p16sm4mvd18p3qpvfm6f9c20w6jy5rkjy",
+    "version": "11.9.0"
   },
   "wordpress-seo": {
-    "path": "wordpress-seo/tags/17.3",
-    "rev": "2609306",
-    "sha256": "0j8dfxnqkgl08g874v1g2ap57xxzbdj85m0yiqkbgqr1q5qz8bwd",
-    "version": "17.3"
+    "path": "wordpress-seo/tags/17.5",
+    "rev": "2623236",
+    "sha256": "0gqgim27g1h3v07s3wh0h8jr3pgalv6r1sksc0qvsk2g23605g0z",
+    "version": "17.5"
   }
 }

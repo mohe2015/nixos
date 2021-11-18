@@ -1,11 +1,12 @@
 { config, lib, pkgs, nixpkgs, ... }:
 
+# WP_VERSION=5.8 WORKERS=1 wp4nix -t tt1-blocks -p gutenberg,wordpress-seo
 let wp4nixPackages = pkgs.callPackage "${nixpkgs}/pkgs/servers/web-apps/wordpress/themes-and-plugins" {
-  plugins = builtins.fromJSON (builtins.readFile ../../../wordpress/plugins.json);
-  themes = builtins.fromJSON (builtins.readFile ../../../wordpress/themes.json);
-  languages = builtins.fromJSON (builtins.readFile ../../../wordpress/languages.json);
-  pluginLanguages = builtins.fromJSON (builtins.readFile ../../../wordpress/pluginLanguages.json);
-  themeLanguages = builtins.fromJSON (builtins.readFile ../../../wordpress/themeLanguages.json);
+  plugins = lib.importJSON ../../../wordpress/plugins.json;
+  themes = lib.importJSON ../../../wordpress/themes.json;
+  languages = lib.importJSON ../../../wordpress/languages.json;
+  pluginLanguages = lib.importJSON ../../../wordpress/pluginLanguages.json;
+  themeLanguages = lib.importJSON ../../../wordpress/themeLanguages.json;
 };
 in
 {
@@ -14,7 +15,7 @@ in
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/wordpress.nix
   services.wordpress.sites = {
     "blog.pi.example.org" = {
-      package = pkgs.wordpress.override { wpPlugins = [ wp4nixPackages.plugins.gutenberg ]; wpThemes = [ pkgs.wordpressPackages.themes.twentytwentyone wp4nixPackages.themes.tt1-blocks ]; };
+      #package = pkgs.wordpress.override { wpPlugins = [ wp4nixPackages.plugins.gutenberg ]; wpThemes = [ pkgs.wordpressPackages.themes.twentytwentyone wp4nixPackages.themes.tt1-blocks ]; };
       #      mutableWpContent = true;
       #virtualHost = {
       #  forceSSL = true;

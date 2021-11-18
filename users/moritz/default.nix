@@ -86,7 +86,7 @@
       pkgs.signal-desktop
       pkgs.xournalpp
       pkgs.thunderbird
-      pkgs.firefox-wayland
+      pkgs.firefox-bin #-wayland
       #      pkgs.eclipses.eclipse-java
       pkgs.git
       pkgs.git-lfs
