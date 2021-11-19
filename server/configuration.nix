@@ -133,7 +133,6 @@
 
   services.matrix-conduit = {
     enable = true;
-    nginx.enable = true;
     settings = {
       global = {
         server_name = "selfmade4u.de";
@@ -150,7 +149,6 @@
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-    enableReload = true;
 
     virtualHosts."selfmade4u.de" = {
       enableACME = true;
@@ -169,7 +167,7 @@
 
       locations."= /.well-known/matrix/server".extraConfig = ''
         add_header Content-Type application/json;
-        return 200 '${builtins.toJSON { "m.server" = "selfmade4u.de:443"; }}';
+        return 200 '${builtins.toJSON { "m.server" = "selfmade4u.de:8448"; }}';
       '';
 
       locations."/_matrix" = {
@@ -181,7 +179,7 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 443 80 ];
+  networking.firewall.allowedTCPPorts = [ 443 80 8448 ];
 
   #services.hydra = {
   #  enable = true;
