@@ -72,6 +72,8 @@
 
   users.mutableUsers = false;
 
+  security.sudo.wheelNeedsPassword = false;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.moritz = {
     isNormalUser = true;
@@ -144,12 +146,37 @@
 
   services.nginx = {
     enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    enableReload = true;
+
     virtualHosts."selfmade4u.de" = {
       enableACME = true;
       forceSSL = true;
 
+      listen = [
+        { ssl = true; port = 443; addr = "0.0.0.0"; }
+        { ssl = true; port = 443; addr = "[::0]"; }
+        { ssl = true; port = 8448; addr = "0.0.0.0"; }
+        { ssl = true; port = 8448; addr = "[::0]"; }
+      ];
+
+      extraConfig = ''
+        merge_slashes off;
+      '';
+
+      locations."= /.well-known/matrix/server".extraConfig = ''
+        add_header Content-Type application/json;
+        return 200 '${builtins.toJSON { "m.server" = "selfmade4u.de:443"; }}';
+      '';
+
       locations."/_matrix" = {
-        proxyPass = "http://[::1]:6167";
+        proxyPass = "http://[::1]:6167$request_uri";
+        extraConfig = ''
+          proxy_buffering off;
+        '';
       };
     };
   };
