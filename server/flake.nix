@@ -4,12 +4,16 @@
   inputs = {
     nixpkgs.url = "path:/etc/nixos/server/nixpkgs";
     deploy-rs.url = "github:serokell/deploy-rs";
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, deploy-rs }: {
+  outputs = { self, nixpkgs, deploy-rs, agenix }: {
     nixosConfigurations.nixos-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
+      modules = [
+        agenix.nixosModules.age
+        ./configuration.nix
+      ];
     };
 
     deploy.nodes.nixos-server = {

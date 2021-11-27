@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./gitlab.nix
     ];
 
   boot.loader.grub.enable = true;
@@ -131,6 +132,7 @@
   security.acme.email = "Moritz.Hedtke@t-online.de";
   security.acme.acceptTerms = true;
 
+/*
   services.matrix-conduit = {
     enable = true;
     settings = {
@@ -142,6 +144,7 @@
       };
     };
   };
+  */
 
   services.nginx = {
     enable = true;
@@ -150,6 +153,7 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
+/*
     virtualHosts."selfmade4u.de" = {
       enableACME = true;
       forceSSL = true;
@@ -177,6 +181,7 @@
         '';
       };
     };
+    */
   };
 
   networking.firewall.allowedTCPPorts = [ 443 80 8448 ];
