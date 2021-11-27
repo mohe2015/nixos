@@ -17,6 +17,21 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
 
+  programs.adb.enable = true;
+
+programs.chromium.enable = true;
+
+services.fwupd = {
+  enable = true;
+};
+
+  hardware.bluetooth.enable = true;
+services.blueman.enable = true;
+
+#services.fprintd.enable = true;
+#security.pam.services.login.fprintAuth = true;
+#security.pam.services.xscreensaver.fprintAuth = true;
+
 #nix.daemon.IONiceLevel = 7;
   /*
     nix.buildMachines = [ {

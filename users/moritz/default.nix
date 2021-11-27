@@ -46,6 +46,8 @@
 
     programs.bash.enable = true;
 
+programs.chromium.enable = true;
+
     home.packages = with pkgs; [
       wf-recorder
       swaylock
@@ -77,6 +79,7 @@
       #pkgs.minecraft
       #      pkgs.sshfs
       pkgs.rustup
+      pkgs.clang_13
       #      pkgs.gcc
       #pkgs.chromium
       #      pkgs.ktorrent
