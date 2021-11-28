@@ -133,13 +133,13 @@
 
         # Source: https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=espresso-logic
         installPhase = ''
-          install -Dm755 "./bin/espresso" "$out/usr/bin/espresso"
-          install -Dm644 "./man/espresso.1" "$out/usr/share/man/man1/espresso.1"
-          install -Dm644 "./man/espresso.5" "$out/usr/share/man/man5/espresso.5"
-          install -Dm644 "./LICENSE" "$out/usr/share/licenses/$pkgname/LICENSE"
-          install -Dm644 -t "$out/usr/share/doc/$pkgname/examples/" ./examples/*
-          install -Dm644 -t "$out/usr/share/doc/$pkgname/hard_examples/" ./hard_examples/*
-          install -Dm644 -t "$out/usr/share/doc/$pkgname/tlex/" ./tlex/*
+          install -Dm755 "./bin/espresso" "$out/bin/espresso"
+          install -Dm644 "./man/espresso.1" "$out/share/man/man1/espresso.1"
+          install -Dm644 "./man/espresso.5" "$out/share/man/man5/espresso.5"
+          install -Dm644 "./LICENSE" "$out/share/licenses/$pkgname/LICENSE"
+          install -Dm644 -t "$out/share/doc/$pkgname/examples/" ./examples/*
+          install -Dm644 -t "$out/share/doc/$pkgname/hard_examples/" ./hard_examples/*
+          install -Dm644 -t "$out/share/doc/$pkgname/tlex/" ./tlex/*
         '';
       };
     }; };
