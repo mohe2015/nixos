@@ -45,9 +45,9 @@ in package.override rec {
   src = pkgs.fetchFromGitHub {
     owner = "mohe2015";
     repo = "mediawiki-extensions-WSOAuth";
-    rev = "d4f532db1f2a6406279b83e98ed2c5a49b51facd";
-    sha256 = "sha256-ZHQW7/UwZE9S3QAXzrDYWRvuYzpaJOd/V+QKBwjSBnw=";
-  };
+    rev = "e74c2ef2e18de680c37ed6189257fe519ea2efa3";
+    sha256 = "sha256-6+1FbIzAUyMcw9gGlccdRUGHdJRsdP1F4DqtdDeKawE=";
+  }; # ./mediawiki-extensions-WSOAuth;
 
   meta = with lib; {
     description = "OAuth authentication for Mediawiki";
@@ -63,9 +63,12 @@ in package.override rec {
 
       $wgDebugLogFile = "/var/log/mediawiki/debug.log";
 
+      $wgGroupPermissions['*']['autocreateaccount'] = true;
+
       $wgOAuthAuthProvider = "github";
+      $wgOAuthUri = "";
       $wgOAuthClientId = "0a8472b7e0d16ac5e998";
-      $wgOAuthClientSecret = file_get_contents("${config.age.secrets.mediawiki_oauth.path}");
+      $wgOAuthClientSecret = trim(file_get_contents("${config.age.secrets.mediawiki_oauth.path}"));
       $wgOAuthRedirectUri = "https://wiki.selfmade4u.de/index.php/Special:PluggableAuthLogin";
     '';
   };
