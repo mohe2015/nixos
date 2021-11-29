@@ -32,31 +32,33 @@
         url = "https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-5757eca.tar.gz";
         sha256 = "sha256-igmZ2rzQ4qTm6DPV4uuWDxCnaxi+qg/Jii2oU2MsdNw=";
       };
-      WSOAuth = let
-  package = (import ./mediawiki/default.nix {
-    inherit pkgs;
-    inherit (pkgs.stdenv.hostPlatform) system;
-    noDev = true; # Disable development dependencies
-  });
+      WSOAuth =
+        let
+          package = (import ./mediawiki/default.nix {
+            inherit pkgs;
+            inherit (pkgs.stdenv.hostPlatform) system;
+            noDev = true; # Disable development dependencies
+          });
 
-in package.override rec {
-  pname = "WSOAuth";
+        in
+        package.override rec {
+          pname = "WSOAuth";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "mohe2015";
-    repo = "mediawiki-extensions-WSOAuth";
-    rev = "e74c2ef2e18de680c37ed6189257fe519ea2efa3";
-    sha256 = "sha256-6+1FbIzAUyMcw9gGlccdRUGHdJRsdP1F4DqtdDeKawE=";
-  }; # ./mediawiki-extensions-WSOAuth;
+          src = pkgs.fetchFromGitHub {
+            owner = "mohe2015";
+            repo = "mediawiki-extensions-WSOAuth";
+            rev = "e74c2ef2e18de680c37ed6189257fe519ea2efa3";
+            sha256 = "sha256-6+1FbIzAUyMcw9gGlccdRUGHdJRsdP1F4DqtdDeKawE=";
+          }; # ./mediawiki-extensions-WSOAuth;
 
-  meta = with lib; {
-    description = "OAuth authentication for Mediawiki";
-    homepage = "https://github.com/mohe2015/mediawiki-extensions-WSOAuth";
-    license = licenses.mit;
-    maintainers = with maintainers; [ mohe2015 ];
-    platforms = platforms.all;
-  };
-};
+          meta = with lib; {
+            description = "OAuth authentication for Mediawiki";
+            homepage = "https://github.com/mohe2015/mediawiki-extensions-WSOAuth";
+            license = licenses.mit;
+            maintainers = with maintainers; [ mohe2015 ];
+            platforms = platforms.all;
+          };
+        };
     };
     extraConfig = ''
       $wgShowExceptionDetails = true;

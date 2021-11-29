@@ -21,23 +21,25 @@
     };
 
     deploy.nodes.nixos-server.profiles.system = {
-        sshUser = "root";
-        user = "root";
-        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nixos-server;
+      sshUser = "root";
+      user = "root";
+      path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nixos-server;
     };
 
     # This is highly advised, and will prevent many possible mistakes
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
-    devShell = let
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
+    devShell =
+      let
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+        };
+      in
+      {
+        x86_64-linux = pkgs.mkShell {
+          nativeBuildInputs = [ deploy-rs.defaultPackage.x86_64-linux nixpkgs.legacyPackages.x86_64-linux.hcloud ];
+        };
       };
-    in {
-      x86_64-linux = pkgs.mkShell {
-        nativeBuildInputs = [ deploy-rs.defaultPackage.x86_64-linux nixpkgs.legacyPackages.x86_64-linux.hcloud  ];
-      };
-    };
   };
 }
 

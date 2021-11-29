@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./gitlab.nix
       ./mediawiki.nix
@@ -51,7 +52,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-  #   font = "Lat2-Terminus16";
+    #   font = "Lat2-Terminus16";
     keyMap = "de";
   };
 
@@ -119,7 +120,7 @@
     enable = true;
     allowReboot = true;
     flake = "/etc/nixos/server";
-    flags = ["--update-input" "nixpkgs" "--commit-lock-file"];
+    flags = [ "--update-input" "nixpkgs" "--commit-lock-file" ];
   };
 
   nix = {
@@ -133,18 +134,18 @@
   security.acme.email = "Moritz.Hedtke@t-online.de";
   security.acme.acceptTerms = true;
 
-/*
-  services.matrix-conduit = {
+  /*
+    services.matrix-conduit = {
     enable = true;
     settings = {
-      global = {
-        server_name = "selfmade4u.de";
-        allow_encryption = true;
-        allow_federation = true;
-        #allow_registration = true;
-      };
+    global = {
+    server_name = "selfmade4u.de";
+    allow_encryption = true;
+    allow_federation = true;
+    #allow_registration = true;
     };
-  };
+    };
+    };
   */
 
   services.nginx = {
@@ -154,34 +155,34 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-/*
-    virtualHosts."selfmade4u.de" = {
+    /*
+      virtualHosts."selfmade4u.de" = {
       enableACME = true;
       forceSSL = true;
 
       listen = [
-        { ssl = true; port = 443; addr = "0.0.0.0"; }
-        { ssl = true; port = 443; addr = "[::0]"; }
-        { ssl = true; port = 8448; addr = "0.0.0.0"; }
-        { ssl = true; port = 8448; addr = "[::0]"; }
+      { ssl = true; port = 443; addr = "0.0.0.0"; }
+      { ssl = true; port = 443; addr = "[::0]"; }
+      { ssl = true; port = 8448; addr = "0.0.0.0"; }
+      { ssl = true; port = 8448; addr = "[::0]"; }
       ];
 
       extraConfig = ''
-        merge_slashes off;
+      merge_slashes off;
       '';
 
       locations."= /.well-known/matrix/server".extraConfig = ''
-        add_header Content-Type application/json;
-        return 200 '${builtins.toJSON { "m.server" = "selfmade4u.de:8448"; }}';
+      add_header Content-Type application/json;
+      return 200 '${builtins.toJSON { "m.server" = "selfmade4u.de:8448"; }}';
       '';
 
       locations."/_matrix" = {
-        proxyPass = "http://[::1]:6167$request_uri";
-        extraConfig = ''
-          proxy_buffering off;
-        '';
+      proxyPass = "http://[::1]:6167$request_uri";
+      extraConfig = ''
+      proxy_buffering off;
+      '';
       };
-    };
+      };
     */
   };
 
@@ -195,9 +196,9 @@
   #  useSubstitutes = false;
   #};
 
-#  nix.extraOptions = ''
-#    secret-key-files = /root/cache-priv-key.pem
-#  '';
+  #  nix.extraOptions = ''
+  #    secret-key-files = /root/cache-priv-key.pem
+  #  '';
 
   # autodetected
   #fileSystems."/nix" = {
