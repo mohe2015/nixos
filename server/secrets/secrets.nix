@@ -11,4 +11,5 @@ in
   "gitlab_secret.age".publicKeys = [ moritz_laptop selfmade4u_de ];
   "gitlab_otp.age".publicKeys = [ moritz_laptop selfmade4u_de ];
   "gitlab_jws.age".publicKeys = [ moritz_laptop selfmade4u_de ];
+  "mediawiki_admin.age".publicKeys = [ moritz_laptop selfmade4u_de ];
 }

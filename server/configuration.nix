@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./gitlab.nix
+      ./mediawiki.nix
     ];
 
   boot.loader.grub.enable = true;
