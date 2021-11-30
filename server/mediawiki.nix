@@ -31,7 +31,7 @@
       VisualEditor = null;
       WikiEditor = null;
       TemplateData = null;
-      #SyntaxHighlight = null;
+      SyntaxHighlight_GeSHi = null;
       CiteThisPage = null;
       MultimediaViewer = null;
       Cite = null;
@@ -39,6 +39,10 @@
       PluggableAuth = pkgs.fetchzip {
         url = "https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-5757eca.tar.gz";
         sha256 = "sha256-igmZ2rzQ4qTm6DPV4uuWDxCnaxi+qg/Jii2oU2MsdNw=";
+      };
+      CodeMirror = pkgs.fetchzip {
+        url = "https://extdist.wmflabs.org/dist/extensions/CodeMirror-REL1_37-6a64183.tar.gz";
+        sha256 = "sha256-gmLt2GAzmuo6sJuVAD9NRVHfQGSadHgB5+n6JJs5/uA=";
       };
       WSOAuth =
         let
@@ -79,11 +83,16 @@
 
       $wgGroupPermissions['*']['autocreateaccount'] = true;
 
+      $wgPluggableAuth_EnableLocalLogin = true;
+
       $wgOAuthAuthProvider = "github";
       $wgOAuthUri = "";
       $wgOAuthClientId = "0a8472b7e0d16ac5e998";
       $wgOAuthClientSecret = trim(file_get_contents("${config.age.secrets.mediawiki_oauth.path}"));
       $wgOAuthRedirectUri = "https://wiki.selfmade4u.de/index.php/Special:PluggableAuthLogin";
+      $wgPluggableAuth_ButtonLabel = "Login with Github";
+
+      $wgPygmentizePath = "${pkgs.python39Packages.pygments}/bin/pygmentize";
     '';
   };
 
