@@ -103,9 +103,21 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8081";
+          proxyPass = "http://localhost:8081"; # TODO FIXME get the apache in between removed as this causes just more problems
         };
+        extraConfig = ''
+          client_max_body_size 100M;
+          proxy_connect_timeout       300;
+          proxy_send_timeout          300;
+          proxy_read_timeout          300;
+          send_timeout                300;
+        '';
       };
     };
   };
+
+  services.phpfpm.pools.mediawiki.phpOptions = ''
+    post_max_size = 100M
+    upload_max_filesize = 100M
+  '';
 }

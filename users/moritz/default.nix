@@ -118,7 +118,7 @@ programs.chromium.enable = true;
         "--enable-native-notifications";*/
     })
 
-        
+      pkgs.wget        
       #pkgs.vscode
       pkgs.discord
       pkgs.libreoffice-still
