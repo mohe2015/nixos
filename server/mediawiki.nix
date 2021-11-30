@@ -44,35 +44,7 @@
         url = "https://extdist.wmflabs.org/dist/extensions/CodeMirror-REL1_37-6a64183.tar.gz";
         sha256 = "sha256-gmLt2GAzmuo6sJuVAD9NRVHfQGSadHgB5+n6JJs5/uA=";
       };
-      MW-OAuth2Client = pkgs.stdenv.mkDerivation {
-        pname = "MW-OAuth2Client";
-        version = "unstable-2021-04-11";
-
-        src = pkgs.fetchFromGitHub {
-            owner = "Schine";
-            repo = "MW-OAuth2Client";
-            rev = "0d2046568ddab0d38638a28887c430e5194fcaba";
-            fetchSubmodules = true;
-            sha256 = "sha256-oy93FehKTv/BHtaYsbJSApJE4b8Sx5oLPQYpTMoiDHg=";
-        };
-
-        # pure evil
-        outputHashMode = "recursive";
-        outputHashAlgo = "sha256";
-        outputHash = "sha256-/TAQHmevtEyh6iMfvrpESO/qCCtmG7xzz3AIUoG5ZhI=";
-
-        nativeBuildInputs = [ pkgs.php80Packages.composer ];
-
-        buildPhase = ''
-          cd vendors/oauth2-client
-          composer install
-          cd ..
-        '';
-
-        installPhase = ''
-          cp -r . $out
-        '';
-      };
+      MW-OAuth2Client = /etc/nixos/server/MW-OAuth2Client;
       WSOAuth =
         let
           package = (import ./mediawiki/default.nix {
