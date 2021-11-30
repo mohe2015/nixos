@@ -56,12 +56,12 @@
         package.override rec {
           pname = "WSOAuth";
 
-          src = pkgs.fetchFromGitHub {
+          src = /*pkgs.fetchFromGitHub {
             owner = "mohe2015";
             repo = "mediawiki-extensions-WSOAuth";
             rev = "e74c2ef2e18de680c37ed6189257fe519ea2efa3";
             sha256 = "sha256-6+1FbIzAUyMcw9gGlccdRUGHdJRsdP1F4DqtdDeKawE=";
-          }; # ./mediawiki-extensions-WSOAuth;
+          }; */ ./mediawiki-extensions-WSOAuth;
 
           meta = with lib; {
             description = "OAuth authentication for Mediawiki";
