@@ -28,6 +28,14 @@
     # tr -dc A-Za-z0-9 < /dev/urandom | head -c 64
     passwordFile = config.age.secrets.mediawiki_admin.path; # must be at least 10 chars
     extensions = {
+      VisualEditor = null;
+      WikiEditor = null;
+      TemplateData = null;
+      #SyntaxHighlight = null;
+      CiteThisPage = null;
+      MultimediaViewer = null;
+      Cite = null;
+      CategoryTree = null;
       PluggableAuth = pkgs.fetchzip {
         url = "https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-5757eca.tar.gz";
         sha256 = "sha256-igmZ2rzQ4qTm6DPV4uuWDxCnaxi+qg/Jii2oU2MsdNw=";
@@ -60,10 +68,14 @@
           };
         };
     };
+    # TODO FIXME don't allow anonymous edits
+    # TODO FIXME don't allow account creation?
     extraConfig = ''
       $wgShowExceptionDetails = true;
 
       $wgDebugLogFile = "/var/log/mediawiki/debug.log";
+
+      $wgServer = "https://wiki.selfmade4u.de";
 
       $wgGroupPermissions['*']['autocreateaccount'] = true;
 
