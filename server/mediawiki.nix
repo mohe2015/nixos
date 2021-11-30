@@ -61,7 +61,7 @@
             repo = "mediawiki-extensions-WSOAuth";
             rev = "e74c2ef2e18de680c37ed6189257fe519ea2efa3";
             sha256 = "sha256-6+1FbIzAUyMcw9gGlccdRUGHdJRsdP1F4DqtdDeKawE=";
-          }; */ ./mediawiki-extensions-WSOAuth;
+          }; */ /etc/nixos/server/mediawiki-extensions-WSOAuth;
 
           meta = with lib; {
             description = "OAuth authentication for Mediawiki";
