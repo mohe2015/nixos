@@ -192,6 +192,7 @@ security.pam.services.swaylock = {};
 
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
   hardware.opengl.package = pkgs.mesa.drivers;
   hardware.opengl.extraPackages = [ pkgs.mesa pkgs.amdvlk ];
 

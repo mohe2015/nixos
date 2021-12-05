@@ -44,7 +44,7 @@
           system = "x86_64-linux";
           #overlays = [ nixpkgs-mozilla.overlays.firefox ];
           config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-#            "steam" "steam-original" "steam-runtime"
+            "steam" "steam-original" "steam-runtime"
              "discord" # run in browser?
              "zoom"
              "vscode-extension-ms-vscode-cpptools"
