@@ -91,8 +91,7 @@ fonts.fonts = with pkgs; [
 
 security.pam.services.swaylock = {};
 
-  programs.java.enable = true;
-
+   
   programs.zsh.enable = true;
 
   #services.printing.enable = true;

@@ -44,6 +44,7 @@
         url = "https://extdist.wmflabs.org/dist/extensions/CodeMirror-REL1_37-6a64183.tar.gz";
         sha256 = "sha256-gmLt2GAzmuo6sJuVAD9NRVHfQGSadHgB5+n6JJs5/uA=";
       };
+      
       MW-OAuth2Client = /etc/nixos/server/MW-OAuth2Client;
       WSOAuth =
         let
@@ -94,6 +95,19 @@
       $wgPluggableAuth_ButtonLabel = "Login with Github";
 
       $wgPygmentizePath = "${pkgs.python39Packages.pygments}/bin/pygmentize";
+
+      $wgOAuth2Client['client']['id']     = '0a8472b7e0d16ac5e998'; // The client ID assigned to you by the provider
+      $wgOAuth2Client['client']['secret'] = trim(file_get_contents("${config.age.secrets.mediawiki_oauth.path}")); // The client secret assigned to you by the provider
+
+      $wgOAuth2Client['configuration']['authorize_endpoint']     = 'https://github.com/login/oauth/authorize'; // Authorization URL
+      $wgOAuth2Client['configuration']['access_token_endpoint']  = 'https://github.com/login/oauth/access_token'; // Token URL
+      $wgOAuth2Client['configuration']['api_endpoint']           = 'https://api.github.com/user'; // URL to fetch user JSON
+      $wgOAuth2Client['configuration']['redirect_uri']           = 'https://wiki.selfmade4u.de/index.php?title=Special:OAuth2Client/callback'; // URL for OAuth2 server to redirect to
+
+      $wgOAuth2Client['configuration']['username'] = 'login'; // JSON path to username
+      $wgOAuth2Client['configuration']['email'] = ""; // JSON path to email
+
+      $wgOAuth2Client['configuration']['scopes'] = 'user:email'; //Permissions
     '';
   };
 

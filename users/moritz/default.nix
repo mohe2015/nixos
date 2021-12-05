@@ -151,6 +151,10 @@ programs.chromium.enable = true;
       # extensions
       #      gnomeExtensions.appindicator
       #      gnomeExtensions.dash-to-dock
+
+  #(pkgs.gradle_6.override {
+  #  defaultJava = pkgs.openjdk8;
+  #})
     ];
 
     #    programs.ssh = {
@@ -165,9 +169,11 @@ programs.chromium.enable = true;
 
   programs.java = {
     enable = true;
+    package = pkgs.openjdk8;
   };
 
   programs.ssh = {
+
     startAgent = true;
   };
 
