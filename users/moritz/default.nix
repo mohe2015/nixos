@@ -76,7 +76,7 @@ programs.chromium.enable = true;
       pkgs.htop
       #      pkgs.kicad
       #pkgs.multimc
-      #pkgs.minecraft
+      pkgs.minecraft
       #      pkgs.sshfs
       pkgs.rustup
       pkgs.clang_13

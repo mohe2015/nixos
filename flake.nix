@@ -56,7 +56,7 @@
 #            "thunderbird-bin"
 #            "firefox-beta-bin" "firefox-beta-bin-unwrapped"
              "vscode"
-#            "minecraft-launcher"
+             "minecraft-launcher"
 #            "veracrypt"
           ];
         };
