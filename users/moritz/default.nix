@@ -21,7 +21,7 @@
       wrapperFeatures.gtk = true;
       config = {
         menu = "wofi --show run";
-        input = { "*" = { xkb_layout = "de"; } ; };
+        input = { "*" = { xkb_layout = "de"; }; };
         bars = [{
           command = "${pkgs.waybar}/bin/waybar";
         }];
@@ -46,7 +46,7 @@
 
     programs.bash.enable = true;
 
-programs.chromium.enable = true;
+    programs.chromium.enable = true;
 
     home.packages = with pkgs; [
       wf-recorder
@@ -98,28 +98,28 @@ programs.chromium.enable = true;
       pkgs.vlc
       (pkgs.vscode-with-extensions.override {
         #vscode = (pkgs.vscodium.override {
-      /*commandLineArgs =
-        "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
-        "--enable-accelerated-video-decode " +
-        "--ozone-platform=wayland " +
-        "--enable-gpu-rasterization " +
-        "--force-dark-mode " +
-        "--enable-native-notifications";*/
-    #});
+        /*commandLineArgs =
+          "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
+          "--enable-accelerated-video-decode " +
+          "--ozone-platform=wayland " +
+          "--enable-gpu-rasterization " +
+          "--force-dark-mode " +
+          "--enable-native-notifications";*/
+        #});
         vscodeExtensions = with pkgs.vscode-extensions; [ ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
       })
       (pkgs.chromium.override {
-      /*commandLineArgs =
-        "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
-        "--enable-accelerated-video-decode " +
-        "--ozone-platform=wayland " +
-        "--enable-gpu-rasterization " +
-        "--disable-sync-preferences " +
-        "--force-dark-mode " +
-        "--enable-native-notifications";*/
-    })
+        /*commandLineArgs =
+          "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
+          "--enable-accelerated-video-decode " +
+          "--ozone-platform=wayland " +
+          "--enable-gpu-rasterization " +
+          "--disable-sync-preferences " +
+          "--force-dark-mode " +
+          "--enable-native-notifications";*/
+      })
 
-      pkgs.wget        
+      pkgs.wget
       #pkgs.vscode
       pkgs.discord
       pkgs.libreoffice-still
@@ -153,9 +153,9 @@ programs.chromium.enable = true;
       #      gnomeExtensions.appindicator
       #      gnomeExtensions.dash-to-dock
 
-  #(pkgs.gradle_6.override {
-  #  defaultJava = pkgs.openjdk8;
-  #})
+      #(pkgs.gradle_6.override {
+      #  defaultJava = pkgs.openjdk8;
+      #})
     ];
 
     #    programs.ssh = {

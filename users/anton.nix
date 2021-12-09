@@ -1,13 +1,13 @@
 { pkgs, ... }:
 {
-home-manager.users.anton = {
+  home-manager.users.anton = {
     home.packages = with pkgs; [
 
-(pkgs.vscode-with-extensions.override {    
+      (pkgs.vscode-with-extensions.override {
         vscodeExtensions = with pkgs.vscode-extensions; [ ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
       })
-];
-};
+    ];
+  };
 
 
   users.users.anton = {
