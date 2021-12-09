@@ -8,6 +8,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../users/moritz
     ../users/tu
     ../users/root
+    ../users/anton.nix
     ../profiles/home/earlyoom
     ../profiles/databases
     #../profiles/gnome.nix

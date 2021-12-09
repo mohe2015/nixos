@@ -79,8 +79,9 @@ programs.chromium.enable = true;
       pkgs.minecraft
       #      pkgs.sshfs
       pkgs.rustup
-      pkgs.clang_13
-      #      pkgs.gcc
+      #pkgs.clang_13
+      pkgs.gcc
+      pkgs.gdb
       #pkgs.chromium
       #      pkgs.ktorrent
       pkgs.lyx
@@ -96,7 +97,7 @@ programs.chromium.enable = true;
       pkgs.gnupg
       pkgs.vlc
       (pkgs.vscode-with-extensions.override {
-        vscode = (pkgs.vscodium.override {
+        #vscode = (pkgs.vscodium.override {
       /*commandLineArgs =
         "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
         "--enable-accelerated-video-decode " +
@@ -104,8 +105,8 @@ programs.chromium.enable = true;
         "--enable-gpu-rasterization " +
         "--force-dark-mode " +
         "--enable-native-notifications";*/
-    });
-#        vscodeExtensions = with pkgs.vscode-registries.openvsx.extensions; [ jnoortheen.nix-ide mshr-h.veriloghdl ];
+    #});
+        vscodeExtensions = with pkgs.vscode-extensions; [ ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
       })
       (pkgs.chromium.override {
       /*commandLineArgs =
