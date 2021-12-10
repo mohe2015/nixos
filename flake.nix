@@ -49,6 +49,7 @@
              "zoom"
              "vscode-extension-ms-vscode-cpptools"
              "vscode-with-extensions"
+             "vscode-extension-ms-vscode-remote-remote-ssh"
 #            "android-studio-canary"
 #            "thunderbird-bin"
 #            "firefox-release-bin-unwrapped"

@@ -96,6 +96,7 @@
       pkgs.git-lfs
       pkgs.gnupg
       pkgs.vlc
+      
       (pkgs.vscode-with-extensions.override {
         #vscode = (pkgs.vscodium.override {
         /*commandLineArgs =
@@ -106,7 +107,7 @@
           "--force-dark-mode " +
           "--enable-native-notifications";*/
         #});
-        vscodeExtensions = with pkgs.vscode-extensions; [ ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
+        vscodeExtensions = with pkgs.vscode-extensions; [ bbenoist.nix ms-vscode-remote.remote-ssh ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
       })
       (pkgs.chromium.override {
         /*commandLineArgs =

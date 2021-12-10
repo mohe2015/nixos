@@ -18,7 +18,11 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
 
+  services.guix.enable = true;
+
   programs.adb.enable = true;
+
+  services.gnome.gnome-keyring.enable = true;
 
   programs.chromium.enable = true;
 
