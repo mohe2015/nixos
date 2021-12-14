@@ -107,7 +107,20 @@
           "--force-dark-mode " +
           "--enable-native-notifications";*/
         #});
-        vscodeExtensions = with pkgs.vscode-extensions; [ bbenoist.nix ms-vscode-remote.remote-ssh ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
+        vscodeExtensions = with pkgs.vscode-extensions; [
+           /*sjhuangx.vscode-scheme */ /*runem.lit-plugin */bbenoist.nix ms-vscode-remote.remote-ssh ms-vscode.cpptools ] # jnoortheen.nix-ide mshr-h.veriloghdl ];
+           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    {
+      name = "vscode-scheme";
+      publisher = "sjhuangx";
+      version = "0.4.0";
+      sha256 = "sha256-BN+C64YQ2hUw5QMiKvC7PHz3II5lEVVy0Shtt6t3ch8=";
+    } { 
+       name = "lit-plugin";
+       publisher = "runem";
+       version = "1.2.1";
+       sha256 = "sha256-VQNJiuVM1pnPLz2f6RwtxkHiy80OX/lf5xRGYTL8HNk=";
+     }];
       })
       (pkgs.chromium.override {
         /*commandLineArgs =
