@@ -52,6 +52,38 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     wantedBy = [ "multi-user.target" ];
   };
 
+  systemd.services.step-ca = {
+    serviceConfig = {
+      ReadOnlyPaths = "/var/data/step-ca";
+    };
+  };
+
+  services.step-ca = {
+    enable = true;
+    address = "0.0.0.0";
+    port = 8443;
+    openFirewall = true;
+    intermediatePasswordFile = "/var/data/step-ca/secrets/password";
+    settings = {
+      dnsNames = [ "caserver" ];
+      root = "/var/data/step-ca/certs/root_ca.crt";
+      crt = "/var/data/step-ca/certs/intermediate_ca.crt";
+      key = "/var/data/step-ca/secrets/intermediate_ca.key";
+      db = {
+        type = "badger";
+        dataSource = "/var/lib/step-ca/db";
+      };
+      authority = {
+        provisioners = [
+          {
+            type = "ACME";
+            name = "acme";
+          }
+        ];
+      };
+    };
+  };
+
   programs.adb.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
