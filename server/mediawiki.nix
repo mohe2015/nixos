@@ -68,8 +68,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "mohe2015";
             repo = "mediawiki-extensions-WSOAuth";
-            rev = "e4c6ab43f71d9b47668b43d1d4a4f0b2cc3d84aa";
-            sha256 = "sha256-qDJch+ED7bEQKmefVfL8h3Gjk3M5F28y7DjmseQohrA=";
+            rev = "ccd1c56bde93aaa966bba7664e8f02aa08745793";
+            sha256 = "sha256-qwqRDFLXgcFqRCaw4cwl88OcWEN5A/eMgjCvN8/MNKk=";
           }; /* /etc/nixos/server/mediawiki-extensions-WSOAuth;*/
 
           meta = with lib; {
@@ -88,6 +88,7 @@
     extraConfig = ''
       $wgShowExceptionDetails = true;
 
+      // sudo chown -R mediawiki:wwwrun /var/log/mediawiki/
       $wgDebugLogFile = "/var/log/mediawiki/debug.log";
 
       $wgServer = "https://wiki.selfmade4u.de";
