@@ -52,11 +52,11 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     wantedBy = [ "multi-user.target" ];
   };
 
-  systemd.services.step-ca = {
+  /*systemd.services.step-ca = {
     serviceConfig = {
       ReadOnlyPaths = "/var/data/step-ca";
     };
-  };
+  };*/
 
   services.step-ca = {
     enable = true;

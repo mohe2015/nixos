@@ -68,8 +68,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "mohe2015";
             repo = "mediawiki-extensions-WSOAuth";
-            rev = "e74c2ef2e18de680c37ed6189257fe519ea2efa3";
-            sha256 = "sha256-6+1FbIzAUyMcw9gGlccdRUGHdJRsdP1F4DqtdDeKawE=";
+            rev = "e4c6ab43f71d9b47668b43d1d4a4f0b2cc3d84aa";
+            sha256 = "sha256-qDJch+ED7bEQKmefVfL8h3Gjk3M5F28y7DjmseQohrA=";
           }; /* /etc/nixos/server/mediawiki-extensions-WSOAuth;*/
 
           meta = with lib; {
@@ -83,6 +83,8 @@
     };
     # TODO FIXME don't allow anonymous edits
     # TODO FIXME don't allow account creation?
+    # TODO FIXME https://phabricator.wikimedia.org/T283908 CONTAINS THE MIGRATION INFORMATION
+    # https://gerrit.wikimedia.org/r/c/mediawiki/extensions/WSOAuth/+/697793/
     extraConfig = ''
       $wgShowExceptionDetails = true;
 
