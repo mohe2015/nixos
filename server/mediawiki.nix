@@ -84,7 +84,9 @@
     # TODO FIXME don't allow anonymous edits
     # TODO FIXME don't allow account creation?
     # TODO FIXME https://phabricator.wikimedia.org/T283908 CONTAINS THE MIGRATION INFORMATION
-    # https://gerrit.wikimedia.org/r/c/mediawiki/extensions/WSOAuth/+/697793/
+    # php extensions/WSOAuth/maintenance/migrateUser.php --user 'Foobar'
+    # https://wiki.selfmade4u.de/api.php?action=query&list=allusers
+    # sudo systemctl stop phpfpm-mediawiki.service mysql.service && sudo rm -Rf /var/lib/mysql/* && sudo rm -Rf /var/lib/mediawiki/* && sudo systemctl start phpfpm-mediawiki.service mysql.service
     extraConfig = ''
       $wgShowExceptionDetails = true;
 

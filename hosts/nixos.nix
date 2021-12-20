@@ -11,8 +11,9 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../users/anton.nix
     ../profiles/home/earlyoom
     ../profiles/databases
+    ../profiles/mediawiki.nix
     #../profiles/gnome.nix
-    (import ../profiles/home/wordpress (args))
+    #(import ../profiles/home/wordpress (args))
     #    ../profiles/home/peertube
     #    ../profiles/k3s-server.nix
     #../profiles/k8s-server.nix #k8s from nixos is garbage
@@ -57,6 +58,8 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
       ReadOnlyPaths = "/var/data/step-ca";
     };
   };*/
+
+
 
   services.step-ca = {
     enable = true;
