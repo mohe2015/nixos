@@ -44,10 +44,12 @@ hcloud server ssh -u moritz $NAME 'nix-channel --update'
 hcloud server ssh -u moritz $NAME 'nix-env -f '"'"'<nixpkgs/nixos>'"'"' --arg configuration {} -iA config.system.build.{nixos-generate-config,nixos-install,nixos-enter}'
 hcloud server ssh -u moritz $NAME 'sudo `which nixos-generate-config` --root /'
 
+exit 0
+
 hcloud server ip $NAME
 hcloud server ip --ipv6 $NAME
 
-scp configuration.nix root@$(hcloud server ip $NAME):/etc/nixos/configuration.nix
+scp setup-configuration.nix root@$(hcloud server ip $NAME):/etc/nixos/configuration.nix
 scp root@$(hcloud server ip $NAME):/etc/nixos/hardware-configuration.nix hardware-configuration.nix
 
 hcloud server ssh -u moritz $NAME 'nix-env -p /nix/var/nix/profiles/system -f '"'"'<nixpkgs/nixos>'"'"' -I nixos-config=/etc/nixos/configuration.nix -iA system'
@@ -72,12 +74,8 @@ ssh-keygen -R $(hcloud server ip $NAME)
 ssh-keyscan $(hcloud server ip $NAME) >> ~/.ssh/known_hosts
 
 #hcloud server ssh $NAME nix-store --generate-binary-cache-key builder-name cache-priv-key.pem cache-pub-key.pem
-hcloud server ssh $NAME nix-channel --update
 hcloud server ssh $NAME rm -rf /old-root
 hcloud server ssh $NAME nix-collect-garbage -d
-
-hcloud server ssh -u moritz $NAME 'nix-channel --add https://nixos.org/channels/nixos-unstable-small nixpkgs'
-hcloud server ssh -u moritz $NAME 'nix-channel --update'
 
 #hcloud server ssh $NAME cat /root/cache-pub-key.pem
 #echo write this into your nixos config

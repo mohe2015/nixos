@@ -85,13 +85,18 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "narHash": "sha256-E7YFzueZ+GDFBHkdGzadptMWhfeQzMNShzT00q+NEcs=",
-        "path": "/etc/nixos/server/nixpkgs",
-        "type": "path"
+        "lastModified": 1639975477,
+        "narHash": "sha256-QRORrBxM0p83NFTN+4eL7ragCRLxVHb9JMwBL6faQ3M=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e7eb62576c8d3bba35136fdafb80ae1aa8e92a05",
+        "type": "github"
       },
       "original": {
-        "path": "/etc/nixos/server/nixpkgs",
-        "type": "path"
+        "owner": "NixOS",
+        "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {

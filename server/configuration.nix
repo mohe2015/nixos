@@ -9,7 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./gitlab.nix
+      # ./gitlab.nix
       ./mediawiki.nix
     ];
 
@@ -116,12 +116,12 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = true;
-    flake = "/etc/nixos/server";
-    flags = [ "--update-input" "nixpkgs" "--commit-lock-file" ];
-  };
+  #system.autoUpgrade = {
+  #  enable = true;
+  #  allowReboot = true;
+  #  flake = "/etc/nixos/server";
+  #  flags = [ "--update-input" "nixpkgs" "--commit-lock-file" ];
+  #};
 
   nix = {
     useSandbox = true;

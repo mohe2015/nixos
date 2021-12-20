@@ -45,7 +45,14 @@
         sha256 = "sha256-gmLt2GAzmuo6sJuVAD9NRVHfQGSadHgB5+n6JJs5/uA=";
       };
 
-      MW-OAuth2Client = /etc/nixos/server/MW-OAuth2Client;
+      /* // github doesn't seem to support OpenID
+      OpenIDConnect = pkgs.fetchzip {
+        url ="https://extdist.wmflabs.org/dist/extensions/OpenIDConnect-REL1_37-18cc623.tar.gz";
+        sha256 = "";
+      };*/
+
+      /*
+      MW-OAuth2Client = /etc/nixos/server/MW-OAuth2Client;*/
       WSOAuth =
         let
           package = (import ./mediawiki/default.nix {
@@ -58,12 +65,12 @@
         package.override rec {
           pname = "WSOAuth";
 
-          src = /*pkgs.fetchFromGitHub {
+          src = pkgs.fetchFromGitHub {
             owner = "mohe2015";
             repo = "mediawiki-extensions-WSOAuth";
             rev = "e74c2ef2e18de680c37ed6189257fe519ea2efa3";
             sha256 = "sha256-6+1FbIzAUyMcw9gGlccdRUGHdJRsdP1F4DqtdDeKawE=";
-            }; */ /etc/nixos/server/mediawiki-extensions-WSOAuth;
+          }; /* /etc/nixos/server/mediawiki-extensions-WSOAuth;*/
 
           meta = with lib; {
             description = "OAuth authentication for Mediawiki";
