@@ -36,14 +36,38 @@
       MultimediaViewer = null;
       Cite = null;
       CategoryTree = null;
-      PluggableAuth = pkgs.fetchzip {
-        url = "https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-5757eca.tar.gz";
-        sha256 = "sha256-igmZ2rzQ4qTm6DPV4uuWDxCnaxi+qg/Jii2oU2MsdNw=";
-      };
       CodeMirror = pkgs.fetchzip {
         url = "https://extdist.wmflabs.org/dist/extensions/CodeMirror-REL1_37-6a64183.tar.gz";
         sha256 = "sha256-gmLt2GAzmuo6sJuVAD9NRVHfQGSadHgB5+n6JJs5/uA=";
       };
+
+       AuthManagerOAuth =
+        let
+          package = (import ./AuthManagerOAuth-composer2nix/default.nix {
+            inherit pkgs;
+            inherit (pkgs.stdenv.hostPlatform) system;
+            noDev = true; # Disable development dependencies
+          });
+
+        in
+        package.override rec {
+          pname = "AuthManagerOAuth";
+
+          src = pkgs.fetchFromGitHub {
+            owner = "mohe2015";
+            repo = "AuthManagerOAuth";
+            rev = "d9fa49fb528fe36b0ca22b6db24ce5638af15d33";
+            sha256 = "";
+          };
+
+          meta = with lib; {
+            description = "OAuth authentication for Mediawiki";
+            homepage = "https://github.com/mohe2015/AuthManagerOAuth";
+            license = licenses.gpl2plus;
+            maintainers = with maintainers; [ mohe2015 ];
+            platforms = platforms.all;
+          };
+        };
 
       /* // github doesn't seem to support OpenID
       OpenIDConnect = pkgs.fetchzip {
@@ -53,6 +77,11 @@
 
       /*
       MW-OAuth2Client = /etc/nixos/server/MW-OAuth2Client;*/
+      /*
+      PluggableAuth = pkgs.fetchzip {
+        url = "https://extdist.wmflabs.org/dist/extensions/PluggableAuth-REL1_37-5757eca.tar.gz";
+        sha256 = "sha256-igmZ2rzQ4qTm6DPV4uuWDxCnaxi+qg/Jii2oU2MsdNw=";
+      };
       WSOAuth =
         let
           package = (import ./mediawiki/default.nix {
@@ -70,7 +99,7 @@
             repo = "mediawiki-extensions-WSOAuth";
             rev = "ccd1c56bde93aaa966bba7664e8f02aa08745793";
             sha256 = "sha256-qwqRDFLXgcFqRCaw4cwl88OcWEN5A/eMgjCvN8/MNKk=";
-          }; /* /etc/nixos/server/mediawiki-extensions-WSOAuth;*/
+          }; # /etc/nixos/server/mediawiki-extensions-WSOAuth;
 
           meta = with lib; {
             description = "OAuth authentication for Mediawiki";
@@ -79,7 +108,7 @@
             maintainers = with maintainers; [ mohe2015 ];
             platforms = platforms.all;
           };
-        };
+        };*/
     };
     # TODO FIXME don't allow anonymous edits
     # TODO FIXME don't allow account creation?

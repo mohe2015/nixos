@@ -44,8 +44,6 @@ hcloud server ssh -u moritz $NAME 'nix-channel --update'
 hcloud server ssh -u moritz $NAME 'nix-env -f '"'"'<nixpkgs/nixos>'"'"' --arg configuration {} -iA config.system.build.{nixos-generate-config,nixos-install,nixos-enter}'
 hcloud server ssh -u moritz $NAME 'sudo `which nixos-generate-config` --root /'
 
-exit 0
-
 hcloud server ip $NAME
 hcloud server ip --ipv6 $NAME
 

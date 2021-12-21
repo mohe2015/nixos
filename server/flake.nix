@@ -2,7 +2,7 @@
   description = "Deployment for my server";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
     agenix.url = "github:ryantm/agenix";
   };
@@ -17,7 +17,7 @@
     };
 
     deploy.nodes.nixos-server = {
-      hostname = "49.12.238.14";
+      hostname = "wiki.selfmade4u.de";
     };
 
     deploy.nodes.nixos-server.profiles.system = {
