@@ -132,7 +132,7 @@
           "--force-dark-mode " +
           "--enable-native-notifications";*/
       })
-
+      #pkgs.mumble
       pkgs.wget
       #pkgs.vscode
       pkgs.discord
@@ -170,6 +170,43 @@
       #(pkgs.gradle_6.override {
       #  defaultJava = pkgs.openjdk8;
       #})
+      (pkgs.stdenv.mkDerivation {
+    pname = "mumble";
+    version = "git";
+
+    nativeBuildInputs = with pkgs; [ cmake pkg-config qt5.wrapQtAppsHook qt5.qttools ];
+    buildInputs = with pkgs; [ boost protobuf libopus libsndfile speex qt5.qtsvg rnnoise alsa-lib libpulseaudio speechd poco flac libogg avahi-compat celt zeroc-ice grpc ];
+    cmakeFlags = [
+      #"-Dserver=OFF"
+      "-Doverlay-xcompile=OFF"
+      "-Dbundled-opus=OFF"
+      # "-Dbundled-celt=OFF" # incompatible with some macro
+      "-Dbundled-speex=OFF"
+      "-Dgrpc=ON"
+      "-Ddisplay-install-paths=ON"
+      "-DIce_HOME=${pkgs.lib.getDev pkgs.zeroc-ice};${pkgs.lib.getLib pkgs.zeroc-ice}"
+      "-DCMAKE_PREFIX_PATH=${pkgs.lib.getDev pkgs.zeroc-ice};${pkgs.lib.getLib pkgs.zeroc-ice}"
+      "-DIce_SLICE_DIR=${pkgs.lib.getDev pkgs.zeroc-ice}/share/ice/slice"
+      "-DIce_DEBUG=ON"
+      #"--log-level=DEBUG"
+      #"--debug-find"
+    ];
+    #NIX_CFLAGS_COMPILE = "-I${self.lib.getDev self.celt}/include/celt";
+
+    src = pkgs.fetchgit {
+      url = "https://github.com/mumble-voip/mumble";
+      rev = "85a7ce56b6342fe93e5877200751809983dffc01";
+      fetchSubmodules = true;
+      sha256 = "1j1b5rp76yl7yzl292hxn6h811npwir5wb0b6zn4fa5bn3h5jic4";
+    };
+
+    #postInstall = ''
+    #  pwd
+
+    #  ls -la
+    #  cp plugins/link/link_tester $out/bin
+    #'';
+  })
     ];
 
     #    programs.ssh = {

@@ -41,33 +41,24 @@
         sha256 = "sha256-gmLt2GAzmuo6sJuVAD9NRVHfQGSadHgB5+n6JJs5/uA=";
       };
 
-       AuthManagerOAuth = (pkgs.stdenv.mkDerivation {
+      AuthManagerOAuth =
+        let
+          package = (import ./AuthManagerOAuth-composer2nix/default.nix {
+            inherit pkgs;
+            inherit (pkgs.stdenv.hostPlatform) system;
+            noDev = true; # Disable development dependencies
+          });
+        in
+        package.override rec {
           pname = "AuthManagerOAuth";
           version = "0.0.1";
 
           src = pkgs.fetchFromGitHub {
             owner = "mohe2015";
             repo = "AuthManagerOAuth";
-            rev = "0651bd806e6d1c48dfe823aa80f22882adaa7b94";
-            sha256 = "sha256-kuxgo3LVoLKBx2XRjWejb/2AlO1iu8GZeWl0PZ1mfUQ=";
+            rev = "a7909a56573445003cf96e3a657eb8396e0ee609";
+            sha256 = "sha256-cq/7filyBSNbf62fkLBTodQTdYTz/fTZxZRKJamBSYQ=";
           };
-
-          # https://discourse.nixos.org/t/making-a-package-getting-path-x-is-not-valid-error/5664
-          #nativeBuildInputs = [ pkgs.git ];
-
-          buildPhase = ''
-            ${pkgs.php80Packages.composer}/bin/composer install --no-dev --no-cache
-          '';
-
-          # https://getcomposer.org/doc/06-config.md#autoloader-suffix
-          # https://github.com/composer/composer/issues/9768
-          installPhase = ''
-            mkdir -p $out; cp -R * $out/
-          '';
-
-          outputHashMode = "recursive";
-          outputHashAlgo = "sha256";
-          outputHash = "sha256-7/POJxnIRyeC4pxF+EdgBcuHkDOd98zlXysFlIs2j7Q="; # TODO FIXME not stable
 
           meta = with lib; {
             description = "OAuth authentication for Mediawiki";
@@ -76,7 +67,7 @@
             maintainers = with maintainers; [ mohe2015 ];
             platforms = platforms.all;
           };
-        });
+        };
 
       /* // github doesn't seem to support OpenID
       OpenIDConnect = pkgs.fetchzip {
@@ -158,6 +149,22 @@
       $wgOAuth2Client['configuration']['email'] = ""; // JSON path to email
 
       $wgOAuth2Client['configuration']['scopes'] = 'user:email'; //Permissions
+
+
+      // TODO FIXME if this is not set the plugin should probably error or ignore
+      $wgAuthManagerOAuthConfig = [
+        'github' => [
+                        'clientId'                => '0a8472b7e0d16ac5e998',
+                        'clientSecret'            => trim(file_get_contents("${config.age.secrets.mediawiki_oauth.path}")),
+                        'urlAuthorize'            => 'https://github.com/login/oauth/authorize',
+                        'urlAccessToken'          => 'https://github.com/login/oauth/access_token',
+                        'urlResourceOwnerDetails' => 'https://api.github.com/user'
+                ],
+        'google' => [
+                'clientId' => 'test'
+        ]
+      ];
+
     '';
   };
 
