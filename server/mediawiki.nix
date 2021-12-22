@@ -41,33 +41,42 @@
         sha256 = "sha256-gmLt2GAzmuo6sJuVAD9NRVHfQGSadHgB5+n6JJs5/uA=";
       };
 
-       AuthManagerOAuth =
-        let
-          package = (import ./AuthManagerOAuth-composer2nix/default.nix {
-            inherit pkgs;
-            inherit (pkgs.stdenv.hostPlatform) system;
-            noDev = true; # Disable development dependencies
-          });
-
-        in
-        package.override rec {
+       AuthManagerOAuth = (pkgs.stdenv.mkDerivation {
           pname = "AuthManagerOAuth";
+          version = "0.0.1";
 
           src = pkgs.fetchFromGitHub {
             owner = "mohe2015";
             repo = "AuthManagerOAuth";
-            rev = "d9fa49fb528fe36b0ca22b6db24ce5638af15d33";
-            sha256 = "";
+            rev = "0651bd806e6d1c48dfe823aa80f22882adaa7b94";
+            sha256 = "sha256-kuxgo3LVoLKBx2XRjWejb/2AlO1iu8GZeWl0PZ1mfUQ=";
           };
+
+          # https://discourse.nixos.org/t/making-a-package-getting-path-x-is-not-valid-error/5664
+          #nativeBuildInputs = [ pkgs.git ];
+
+          buildPhase = ''
+            ${pkgs.php80Packages.composer}/bin/composer install --no-dev --no-cache
+          '';
+
+          # https://getcomposer.org/doc/06-config.md#autoloader-suffix
+          # https://github.com/composer/composer/issues/9768
+          installPhase = ''
+            mkdir -p $out; cp -R * $out/
+          '';
+
+          outputHashMode = "recursive";
+          outputHashAlgo = "sha256";
+          outputHash = "sha256-7/POJxnIRyeC4pxF+EdgBcuHkDOd98zlXysFlIs2j7Q="; # TODO FIXME not stable
 
           meta = with lib; {
             description = "OAuth authentication for Mediawiki";
             homepage = "https://github.com/mohe2015/AuthManagerOAuth";
-            license = licenses.gpl2plus;
+            license = licenses.gpl2Plus;
             maintainers = with maintainers; [ mohe2015 ];
             platforms = platforms.all;
           };
-        };
+        });
 
       /* // github doesn't seem to support OpenID
       OpenIDConnect = pkgs.fetchzip {
