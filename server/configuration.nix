@@ -11,6 +11,7 @@
       ./hardware-configuration.nix
       # ./gitlab.nix
       ./mediawiki.nix
+      <agenix/modules/age.nix>
     ];
 
   boot.loader.grub.enable = true;
