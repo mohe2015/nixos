@@ -51,13 +51,13 @@
         in
         package.override rec {
           pname = "AuthManagerOAuth";
-          version = "0.0.1";
+          version = "0.0.2";
 
           src = pkgs.fetchFromGitHub {
             owner = "mohe2015";
             repo = "AuthManagerOAuth";
-            rev = "a7909a56573445003cf96e3a657eb8396e0ee609";
-            sha256 = "sha256-cq/7filyBSNbf62fkLBTodQTdYTz/fTZxZRKJamBSYQ=";
+            rev = "1e33ecc2a8108fd328aa28a612229e7da43d7956";
+            sha256 = "sha256-/ji9+9k41qVKouZo6T9j6Tpk/LrdFk2ahlnNwVcjyMs=";
           };
 
           meta = with lib; {

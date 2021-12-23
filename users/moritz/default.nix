@@ -97,7 +97,7 @@
       pkgs.gnupg
       pkgs.vlc
       
-      (pkgs.vscode-with-extensions.override {
+    #  (pkgs.vscode-with-extensions.override {
         #vscode = (pkgs.vscodium.override {
         /*commandLineArgs =
           "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
@@ -107,9 +107,9 @@
           "--force-dark-mode " +
           "--enable-native-notifications";*/
         #});
-        vscodeExtensions = with pkgs.vscode-extensions; [
-           /*sjhuangx.vscode-scheme */ /*runem.lit-plugin */bbenoist.nix ms-vscode-remote.remote-ssh ms-vscode.cpptools ] # jnoortheen.nix-ide mshr-h.veriloghdl ];
-           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+   #     vscodeExtensions = with pkgs.vscode-extensions; [
+   #        /*sjhuangx.vscode-scheme */ /*runem.lit-plugin */bbenoist.nix ms-vscode-remote.remote-ssh ms-vscode.cpptools ] # jnoortheen.nix-ide mshr-h.veriloghdl ];
+   /*        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     {
       name = "vscode-scheme";
       publisher = "sjhuangx";
@@ -121,7 +121,8 @@
        version = "1.2.1";
        sha256 = "sha256-VQNJiuVM1pnPLz2f6RwtxkHiy80OX/lf5xRGYTL8HNk=";
      }];
-      })
+      })*/
+      pkgs.vscode
       (pkgs.chromium.override {
         /*commandLineArgs =
           "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
