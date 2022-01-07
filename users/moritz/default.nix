@@ -49,7 +49,8 @@
     programs.chromium.enable = true;
 
     home.packages = with pkgs; [
-      nixos-nspawn
+      nixpkgs-review
+      #nixos-nspawn
       wf-recorder
       swaylock
       swayidle
