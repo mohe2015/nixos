@@ -44,17 +44,20 @@
           system = "x86_64-linux";
           #overlays = [ nixpkgs-mozilla.overlays.firefox ];
           config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-#            "steam" "steam-original" "steam-runtime"
+            "steam" "steam-original" "steam-runtime"
              "discord" # run in browser?
              "zoom"
+             "vscode-extension-ms-vscode-cpptools"
+             "vscode-with-extensions"
+             "vscode-extension-ms-vscode-remote-remote-ssh"
 #            "android-studio-canary"
 #            "thunderbird-bin"
 #            "firefox-release-bin-unwrapped"
 #            "firefox-bin"
 #            "thunderbird-bin"
 #            "firefox-beta-bin" "firefox-beta-bin-unwrapped"
-#            "vscode"
-#            "minecraft-launcher"
+             "vscode"
+             "minecraft-launcher"
 #            "veracrypt"
           ];
         };
@@ -110,9 +113,37 @@
         system = "x86_64-linux";
         crossSystem = "aarch64-linux";
       };
-    in {
+    in { "x86_64-linux" = {
       test = crossPkgs.stdenv.mkDerivation { name = "env"; };
-    };
+      espresso = pkgs.stdenv.mkDerivation {
+        name = "espresso";
+
+        # https://github.com/classabbyamp/espresso-logic
+        src = pkgs.fetchFromGitHub {
+          owner = "classabbyamp";
+          repo = "espresso-logic";
+          rev = "85265139e9598852f9388d293658a1977a829a01";
+          sha256 = "sha256-qgq+9Z3zYLXakJ0CQtF6eF8tL26CB6UTto/L3ZuqRdk=";
+        };
+
+        buildPhase = ''
+          cd espresso-src
+          make
+          cd ..
+        '';
+
+        # Source: https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=espresso-logic
+        installPhase = ''
+          install -Dm755 "./bin/espresso" "$out/bin/espresso"
+          install -Dm644 "./man/espresso.1" "$out/share/man/man1/espresso.1"
+          install -Dm644 "./man/espresso.5" "$out/share/man/man5/espresso.5"
+          install -Dm644 "./LICENSE" "$out/share/licenses/$pkgname/LICENSE"
+          install -Dm644 -t "$out/share/doc/$pkgname/examples/" ./examples/*
+          install -Dm644 -t "$out/share/doc/$pkgname/hard_examples/" ./hard_examples/*
+          install -Dm644 -t "$out/share/doc/$pkgname/tlex/" ./tlex/*
+        '';
+      };
+    }; };
     devShell = let
       pkgs = import nixpkgs {
         system = "x86_64-linux";

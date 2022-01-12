@@ -8,9 +8,7 @@ in
   nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
   nix = {
-    package = pkgs.nixUnstable.override {
-      patches = [ ./unset-is-macho.patch ];
-    };
+    package = pkgs.nixUnstable;
 
     useSandbox = true;
 
@@ -19,5 +17,5 @@ in
     '';
   };
 
-  users.mutableUsers = false;
+  users.mutableUsers = true; # guix
 }

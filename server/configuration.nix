@@ -6,11 +6,14 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # ./gitlab.nix
+      ./mediawiki.nix
+#      <agenix/modules/age.nix>
     ];
 
-  # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.efiSupport = true;
@@ -19,7 +22,10 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-  networking.hostName = "nixos-builder"; # Define your hostname.
+  # hetzner doesnt support efi only but this would probably allow automatic rollback
+  #boot.loader.systemd-boot.enable = true;
+
+  networking.hostName = "nixos-server"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -29,7 +35,16 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.eth0.useDHCP = true;
+  networking.useNetworkd = true;
+
+  systemd.network.enable = true;
+  systemd.network.networks = {
+    "40-wired" = {
+      enable = true;
+      name = "en*";
+      DHCP = "yes";
+    };
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -38,7 +53,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-  #   font = "Lat2-Terminus16";
+    #   font = "Lat2-Terminus16";
     keyMap = "de";
   };
 
@@ -59,16 +74,20 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  users.mutableUsers = false;
+
+  security.sudo.wheelNeedsPassword = false;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.moritz = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    # sudo cat /root/.ssh/id_rsa.pub
-    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDkur1jL+EAQ+i48svt0iERUYNAA6tlR3TeVXq2+IXc4WoerwXzpUwuagB5ynNyTdk+nmAzLZ4kP/kbkqI3DkZhcHL9k2E0ywdsxsHezCEeDu7h5ZwsZr9gkGPjJtceRtk5bE/JQrrBvZWhn7N3bghNj8skuaox1qtiU2KpEW8mlg6yxYMJIEdPXnLWRep8kCj/HCZwJ9wzpYs1ZdNsNIom2/eXGaK0b/1wvypTsC991oBzXtdEICR7Vyd/tlTQ0+roN2PSPSqQgq3RQx/87fz2rlfSu3bXAG0gZ5/aPPjRSqs4B5v0duwapNl6gDI2kwzwd4ORIDQgZwm979z+FmlXrJWnuvyvR/caih/pbRFu4DHWPRhJERTaHvCUBC12BJI5PkyJEvgWcFxdOo6EFPCvYvBRP2TweEWr0da5LA1sseeu+HVjTtfP9EAAqxOT6vR98c7gIT5YkW7Bw/xgdWxzVLdcSMooquGB4WyI2J8HneakVVxlPGhYgrS1GwjdO+zZMY75Jqo3qnK11M/gYX+0FHraDKf0tT3Ygk8FgRVmHG/t3U6T7zk+mHYf1+oeoFHC88gob7DJL3fQCf+288dzqqxqG3esJlwj3/hwQThLu6QipyyQ86jC/rz+ann7LnEGRf9Zg8ykVDGj/POhxWHD1tw0mUTtFQh2mdyKGlNABQ== root@nixos" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
+    # cat ~/.ssh/id_ed25519.pub
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
   };
 
   users.users.root = {
-    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDkur1jL+EAQ+i48svt0iERUYNAA6tlR3TeVXq2+IXc4WoerwXzpUwuagB5ynNyTdk+nmAzLZ4kP/kbkqI3DkZhcHL9k2E0ywdsxsHezCEeDu7h5ZwsZr9gkGPjJtceRtk5bE/JQrrBvZWhn7N3bghNj8skuaox1qtiU2KpEW8mlg6yxYMJIEdPXnLWRep8kCj/HCZwJ9wzpYs1ZdNsNIom2/eXGaK0b/1wvypTsC991oBzXtdEICR7Vyd/tlTQ0+roN2PSPSqQgq3RQx/87fz2rlfSu3bXAG0gZ5/aPPjRSqs4B5v0duwapNl6gDI2kwzwd4ORIDQgZwm979z+FmlXrJWnuvyvR/caih/pbRFu4DHWPRhJERTaHvCUBC12BJI5PkyJEvgWcFxdOo6EFPCvYvBRP2TweEWr0da5LA1sseeu+HVjTtfP9EAAqxOT6vR98c7gIT5YkW7Bw/xgdWxzVLdcSMooquGB4WyI2J8HneakVVxlPGhYgrS1GwjdO+zZMY75Jqo3qnK11M/gYX+0FHraDKf0tT3Ygk8FgRVmHG/t3U6T7zk+mHYf1+oeoFHC88gob7DJL3fQCf+288dzqqxqG3esJlwj3/hwQThLu6QipyyQ86jC/rz+ann7LnEGRf9Zg8ykVDGj/POhxWHD1tw0mUTtFQh2mdyKGlNABQ== root@nixos" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpm6jXKndgHfeANK/Dipr2f5x75EDY17/NfUieutEJ4 moritz@nixos" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -98,14 +117,96 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  #system.autoUpgrade = {
+  #  enable = true;
+  #  allowReboot = true;
+  #  flake = "/etc/nixos/server";
+  #  flags = [ "--update-input" "nixpkgs" "--commit-lock-file" ];
+  #};
 
-  nix.gc.automatic = true;
+  nix = {
+    useSandbox = true;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    gc.automatic = true;
+  };
 
-  nix.extraOptions = ''
-    secret-key-files = /root/cache-priv-key.pem
-  '';
+  security.acme.email = "Moritz.Hedtke@t-online.de";
+  security.acme.acceptTerms = true;
+
+  /*
+    services.matrix-conduit = {
+    enable = true;
+    settings = {
+    global = {
+    server_name = "selfmade4u.de";
+    allow_encryption = true;
+    allow_federation = true;
+    #allow_registration = true;
+    };
+    };
+    };
+  */
+
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+
+    /*
+      virtualHosts."selfmade4u.de" = {
+      enableACME = true;
+      forceSSL = true;
+
+      listen = [
+      { ssl = true; port = 443; addr = "0.0.0.0"; }
+      { ssl = true; port = 443; addr = "[::0]"; }
+      { ssl = true; port = 8448; addr = "0.0.0.0"; }
+      { ssl = true; port = 8448; addr = "[::0]"; }
+      ];
+
+      extraConfig = ''
+      merge_slashes off;
+      '';
+
+      locations."= /.well-known/matrix/server".extraConfig = ''
+      add_header Content-Type application/json;
+      return 200 '${builtins.toJSON { "m.server" = "selfmade4u.de:8448"; }}';
+      '';
+
+      locations."/_matrix" = {
+      proxyPass = "http://[::1]:6167$request_uri";
+      extraConfig = ''
+      proxy_buffering off;
+      '';
+      };
+      };
+    */
+  };
+
+  networking.firewall.allowedTCPPorts = [ 443 80 8448 ];
+
+  #services.hydra = {
+  #  enable = true;
+  #  hydraURL = "http://localhost:3000";
+  #  notificationSender = "hydra@localhost";
+  #  buildMachinesFiles = [];
+  #  useSubstitutes = false;
+  #};
+
+  #  nix.extraOptions = ''
+  #    secret-key-files = /root/cache-priv-key.pem
+  #  '';
+
+  # autodetected
+  #fileSystems."/nix" = {
+  #  device = "/dev/disk/by-id/scsi-0HC_Volume_14477825";
+  #  fsType = "ext4";
+  #  options = [ "discard" "nofail" "defaults" ];
+  #};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -15,7 +15,7 @@
     # username = admin
     passwordFile = ../../../secrets/pi-mediawiki-password; # must be at least 10 chars
     extraConfig = ''
-    $wgShowExceptionDetails = true;
+      $wgShowExceptionDetails = true;
     '';
   };
 
