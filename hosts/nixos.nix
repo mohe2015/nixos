@@ -266,7 +266,8 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.package = pkgs.mesa.drivers;
-  hardware.opengl.extraPackages = [ pkgs.mesa pkgs.amdvlk ];
+  # --enable-features=VaapiVideoDecoder
+  hardware.opengl.extraPackages = [ pkgs.mesa pkgs.amdvlk pkgs.vaapiIntel pkgs.libvdpau-va-gl pkgs.vaapiVdpau ];
 
   # commented out for pulseaudio
   #sound.enable = true;

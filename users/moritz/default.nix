@@ -10,10 +10,10 @@
       signing.key = "1248D3E11D114A8575C989346794D45A488C2EDE";
     };
 
-    home.file.".npmrc".text = ''
-      prefix=/home/moritz/.npm
-      ignore-scripts=true
-    '';
+    #home.file.".npmrc".text = ''
+    #  prefix=/home/moritz/.npm
+    #  ignore-scripts=true
+    #'';
 
     wayland.windowManager.sway = {
       enable = true;
