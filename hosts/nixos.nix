@@ -91,7 +91,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
 
   services.gnome.gnome-keyring.enable = true;
 
-  programs.chromium.enable = true;
+  #programs.chromium.enable = true;
 
   services.fwupd = {
     enable = true;
@@ -235,7 +235,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
 
-  virtualisation.libvirtd.enable = true;
+  #virtualisation.libvirtd.enable = true;
 
   #programs.wireshark.enable = true;
 
@@ -490,5 +490,5 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
 
   system.stateVersion = "21.05";
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  #boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

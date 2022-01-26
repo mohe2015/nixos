@@ -46,9 +46,10 @@
 
     programs.bash.enable = true;
 
-    programs.chromium.enable = true;
+    #programs.chromium.enable = true;
 
     home.packages = with pkgs; [
+      racket
       nixpkgs-review
       #nixos-nspawn
       wf-recorder
@@ -125,7 +126,7 @@
      }];
       })*/
       pkgs.vscode
-      (pkgs.chromium.override {
+      #(pkgs.chromium.override {
         /*commandLineArgs =
           "--enable-features=VaapiVideoDecoder,UseOzonePlatform " +
           "--enable-accelerated-video-decode " +
@@ -134,12 +135,12 @@
           "--disable-sync-preferences " +
           "--force-dark-mode " +
           "--enable-native-notifications";*/
-      })
+      #})
       #pkgs.mumble
       pkgs.wget
       #pkgs.vscode
       pkgs.discord
-      pkgs.libreoffice-still
+      #pkgs.libreoffice-still
       pkgs.texlive.combined.scheme-full
       #      pkgs.unzip
       pkgs.obs-studio
