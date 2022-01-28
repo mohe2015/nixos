@@ -140,7 +140,7 @@
       pkgs.wget
       #pkgs.vscode
       pkgs.discord
-      #pkgs.libreoffice-still
+      pkgs.libreoffice-fresh
       pkgs.texlive.combined.scheme-full
       #      pkgs.unzip
       pkgs.obs-studio

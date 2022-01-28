@@ -377,7 +377,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
   ];
 
 
-  #programs.steam.enable = true;
+  programs.steam.enable = true;
 
   #services.fstrim.enable = true;
 
