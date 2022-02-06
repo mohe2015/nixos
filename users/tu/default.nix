@@ -5,7 +5,7 @@
 
     home.packages = with pkgs; [
       pkgs.firefox-wayland
-#      pkgs.chromium
+      pkgs.chromium
       pkgs.keepassxc
       pkgs.zoom-us
       pkgs.git

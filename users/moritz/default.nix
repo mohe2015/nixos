@@ -46,7 +46,7 @@
 
     programs.bash.enable = true;
 
-    #programs.chromium.enable = true;
+    programs.chromium.enable = true;
 
     home.packages = with pkgs; [
       racket
@@ -83,7 +83,7 @@
       #      pkgs.sshfs
       pkgs.rustup
       #pkgs.clang_13
-      pkgs.gcc
+      #pkgs.gcc
       pkgs.gdb
       #pkgs.chromium
       #      pkgs.ktorrent

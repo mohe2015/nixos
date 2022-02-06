@@ -183,8 +183,13 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
   #programs.adb.enable = true;
   #programs.npm.enable = true;
 
-  ##services.avahi.enable = true;
-  #services.avahi.nssmdns = true;
+  services.avahi.enable = true;
+ services.avahi.nssmdns = true;
+ services.avahi.publish = {
+    enable = true;
+    addresses = true;
+    workstation = true;
+  };
   # STUPID PRINTER https://nixos.wiki/wiki/Printing
   ##services.avahi.nssmdns = false; # Use the settings from below
   # settings from avahi-daemon.nix where mdns is replaced with mdns4
