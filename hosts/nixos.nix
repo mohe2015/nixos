@@ -38,33 +38,35 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
         enableACME = true;
         extraConfig = ''
 
+client_max_body_size 15k;
+
 location = /favicon.ico {
     expires max;
-    root   /home/moritz/Documents/projektwahl-lit/dist/;
+    root   /opt/projektwahl-lit/dist/;
     try_files /favicon.ico =404;
   }
 
   location / {
     expires epoch;
-    root   /home/moritz/Documents/projektwahl-lit/dist/;
+    root   /opt/projektwahl-lit/dist/;
     try_files /index.html =404;
   }
 
   location /dist {
     expires max;  
-    root   /home/moritz/Documents/projektwahl-lit/;
+    root   /opt/projektwahl-lit/;
     try_files $uri =404;
   }
 
   location /node_modules {
     expires epoch;
-    root   /home/moritz/Documents/projektwahl-lit/;
+    root   /opt/projektwahl-lit/;
     try_files $uri =404;
   }
 
   location /src {
     expires epoch;
-    root   /home/moritz/Documents/projektwahl-lit/;
+    root   /opt/projektwahl-lit/;
     try_files $uri =404;
   }
 
