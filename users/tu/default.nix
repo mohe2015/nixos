@@ -4,8 +4,8 @@
     imports = [ ];
 
     home.packages = with pkgs; [
-      pkgs.firefox-wayland
-      pkgs.chromium
+      pkgs.firefox-bin
+      #pkgs.chromium
       pkgs.keepassxc
       pkgs.zoom-us
       pkgs.git

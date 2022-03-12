@@ -19,6 +19,64 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     #../profiles/k8s-server.nix #k8s from nixos is garbage
   ];
 
+  security.acme.acceptTerms = true;
+  security.acme.defaults.email = "Moritz.Hedtke@t-online.de";
+
+  services.nginx = {
+    enable = true;
+    package = pkgs.nginxQuic;
+    recommendedOptimisation = true;
+    recommendedTlsSettings = true;
+    recommendedGzipSettings = true;
+    recommendedProxySettings = true;
+    virtualHosts = {
+      "localhost" = {
+        #http3 = true;
+        http2 = true;
+        default = true;
+        onlySSL = true;
+        enableACME = true;
+        extraConfig = ''
+
+location = /favicon.ico {
+    expires max;
+    root   /home/moritz/Documents/projektwahl-lit/dist/;
+    try_files /favicon.ico =404;
+  }
+
+  location / {
+    expires epoch;
+    root   /home/moritz/Documents/projektwahl-lit/dist/;
+    try_files /index.html =404;
+  }
+
+  location /dist {
+    expires max;  
+    root   /home/moritz/Documents/projektwahl-lit/;
+    try_files $uri =404;
+  }
+
+  location /node_modules {
+    expires epoch;
+    root   /home/moritz/Documents/projektwahl-lit/;
+    try_files $uri =404;
+  }
+
+  location /src {
+    expires epoch;
+    root   /home/moritz/Documents/projektwahl-lit/;
+    try_files $uri =404;
+  }
+
+  location /api {
+    proxy_pass https://localhost:8443;
+  }
+
+        '';
+      };
+    };
+  };
+
   #services.guix.enable = true;
 
   users = {
@@ -28,7 +86,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
           group = "guixbuild";
           extraGroups = [ "guixbuild" ];
           home = "/var/empty";
-          shell = pkgs.nologin;
+          shell = pkgs.shadow;
           description = "Guix build user ${i}";
           isSystemUser = true;
         };
@@ -61,7 +119,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
 
 
 
-  services.step-ca = {
+  /*services.step-ca = {
     enable = true;
     address = "0.0.0.0";
     port = 8443;
@@ -85,7 +143,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
         ];
       };
     };
-  };
+  };*/
 
   programs.adb.enable = true;
 
@@ -104,7 +162,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
   #security.pam.services.login.fprintAuth = true;
   #security.pam.services.xscreensaver.fprintAuth = true;
 
-  #nix.daemon.IONiceLevel = 7;
+  nix.daemonIOSchedPriority = 7;
   /*
     nix.buildMachines = [ {
     # The path to the SSH private key with which to authenticate on the build machine. The private key must not have a passphrase. If null, the building user (root on NixOS machines) must have an appropriate ssh configuration to log in non-interactively. Note that for security reasons, this path must point to a file in the local filesystem, *not* to the nix store. 
@@ -143,7 +201,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
-    media-session.enable = true;
+   # media-session.enable = true;
   };
   xdg = {
     portal = {

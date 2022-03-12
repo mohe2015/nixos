@@ -2,7 +2,7 @@
 {
   home-manager.users.anton = {
     home.packages = with pkgs; [
-      pkgs.firefox
+      pkgs.firefox-bin
       pkgs.gnumake
       pkgs.gcc
       pkgs.gdb

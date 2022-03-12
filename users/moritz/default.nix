@@ -65,7 +65,7 @@
 
       alsaUtils
 
-      virt-manager
+     # virt-manager
       #pkgs.qjackctl
       #      pkgs.hcloud
       #      pkgs.wget
@@ -81,7 +81,7 @@
       #pkgs.multimc
       pkgs.minecraft
       #      pkgs.sshfs
-      pkgs.rustup
+      #pkgs.rustup
       #pkgs.clang_13
       #pkgs.gcc
       pkgs.gdb
