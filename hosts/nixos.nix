@@ -10,7 +10,7 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../users/root
     ../users/anton.nix
     ../profiles/home/earlyoom
-    ../profiles/databases
+    #../profiles/databases
     #../profiles/mediawiki.nix
     #../profiles/gnome.nix
     (import ../profiles/home/wordpress (args))
@@ -21,6 +21,11 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
 
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "Moritz.Hedtke@t-online.de";
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_14;
+  };
 
   services.nginx = {
     enable = true;

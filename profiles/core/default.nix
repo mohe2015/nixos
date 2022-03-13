@@ -5,12 +5,11 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-
   nix = {
     package = pkgs.nixUnstable;
 
-    useSandbox = true;
+    settings.sandbox = true;
+    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
     extraOptions = ''
       experimental-features = nix-command flakes
