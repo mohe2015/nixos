@@ -25,6 +25,12 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_14;
+    settings = {
+#    log_min_error_statement = "DEBUG5";
+#    log_min_messages = "DEBUG5";
+    logging_collector = true;
+    log_statement = "all";
+  };
   };
 
   services.nginx = {
@@ -279,12 +285,6 @@ location = /favicon.ico {
 
   networking.extraHosts =
     ''
-      127.0.0.1 peertube.localhost
-      192.168.100.11 totallynotlocalhost.de
-      127.0.0.1 blog.pi.example.org
-      192.168.100.11 mattermost.pi.example.org
-      192.168.2.128 core.harbor.domain
-      192.168.2.128 keycloak.local
     '';
 
   virtualisation.docker.enable = true;

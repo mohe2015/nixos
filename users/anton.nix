@@ -7,7 +7,7 @@
       pkgs.gcc
       pkgs.gdb
       (pkgs.vscode-with-extensions.override {
-        vscodeExtensions = with pkgs.vscode-extensions; [ ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
+#        vscodeExtensions = with pkgs.vscode-extensions; [ ms-vscode.cpptools ]; # jnoortheen.nix-ide mshr-h.veriloghdl ];
       })
     ];
   };
