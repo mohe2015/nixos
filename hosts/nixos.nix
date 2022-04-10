@@ -262,6 +262,7 @@ location = /favicon.ico {
     };
   };
 
+  age.secrets.eduroam.file = ../../secrets/eduroam.age;
   networking.wireless = {
     enable = true;
     environmentFile = config.age.secrets.eduroam.path;
