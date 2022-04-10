@@ -262,7 +262,8 @@ location = /favicon.ico {
     };
   };
 
-  age.secrets.eduroam.file = ../../secrets/eduroam.age;
+  age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  age.secrets.eduroam.file = ../secrets/eduroam.age;
   networking.wireless = {
     enable = true;
     environmentFile = config.age.secrets.eduroam.path;
@@ -273,7 +274,7 @@ location = /favicon.ico {
         key_mgmt=WPA-EAP
         eap=PEAP
         identity="@IDENTITY@"
-        password=@PASSWORD@
+        password="@PASSWORD@"
         domain_suffix_match="radius.hrz.tu-darmstadt.de"
         anonymous_identity="eduroam@tu-darmstadt.de"
         phase2="auth=MSCHAPV2"
