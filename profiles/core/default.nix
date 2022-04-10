@@ -6,15 +6,8 @@ in
   home-manager.useUserPackages = true;
 
   nix = {
-    package = pkgs.nixUnstable;
-
-    settings.sandbox = true;
-    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
-
-  users.mutableUsers = true; # guix
 }

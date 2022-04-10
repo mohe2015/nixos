@@ -70,7 +70,7 @@
       #      pkgs.hcloud
       #      pkgs.wget
       #pkgs.veracrypt
-      pkgs.tor-browser-bundle-bin
+      #pkgs.tor-browser-bundle-bin
       #      pkgs.sqlite
       #      pkgs.sqlite.dev
       #      pkgs.pkg-config
@@ -93,7 +93,7 @@
       pkgs.signal-desktop
       pkgs.xournalpp
       pkgs.thunderbird
-      pkgs.firefox-bin #-wayland
+      pkgs.firefox #-wayland
       #      pkgs.eclipses.eclipse-java
       pkgs.git
       pkgs.git-lfs
@@ -141,7 +141,7 @@
       #pkgs.vscode
       pkgs.discord
       pkgs.libreoffice-fresh
-      pkgs.texlive.combined.scheme-full
+      #pkgs.texlive.combined.scheme-full
       #      pkgs.unzip
       pkgs.obs-studio
       #      pkgs.wireshark
@@ -174,7 +174,7 @@
       #(pkgs.gradle_6.override {
       #  defaultJava = pkgs.openjdk8;
       #})
-      (pkgs.stdenv.mkDerivation {
+      /*(pkgs.stdenv.mkDerivation {
     pname = "mumble";
     version = "git";
 
@@ -210,7 +210,7 @@
     #  ls -la
     #  cp plugins/link/link_tester $out/bin
     #'';
-  })
+  })*/
     ];
 
     #    programs.ssh = {

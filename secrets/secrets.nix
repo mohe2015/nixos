@@ -6,5 +6,5 @@ let
   nixsd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMGLfiYkTFKk/kWOfbFQ6/03tgBQOc0A7sy+c2YuLo0D"; # sudo cat /var/lib/containers/pi/etc/ssh/ssh_host_ed25519_key.pub
 in
 {
-  "pi-smallstep-intermediate-password.age".publicKeys = [ nixos_moritz nixos nixsd ];
+  "eduroam.age".publicKeys = [ nixos_moritz nixos ];
 }
