@@ -70,7 +70,7 @@
       #      pkgs.hcloud
       #      pkgs.wget
       #pkgs.veracrypt
-      #pkgs.tor-browser-bundle-bin
+      pkgs.tor-browser-bundle-bin
       #      pkgs.sqlite
       #      pkgs.sqlite.dev
       #      pkgs.pkg-config
