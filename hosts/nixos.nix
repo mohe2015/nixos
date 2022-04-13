@@ -8,6 +8,8 @@ args@{ self, lib, pkgs, nixpkgs, home-manager, config, agenix, release, home-man
     ../users/anton.nix
   ];
 
+  virtualisation.docker.enable = true;
+
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_14;
